@@ -1,13 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap");
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
+@import "tw-animate-css";
 
 * {
   box-sizing: border-box;
 }
 
 html {
-  background: linear-gradient(165deg, #00303a, #014c6a);
+  background: linear-gradient(165deg, #004551, #026080);
   font-family: sans-serif;
   margin: 0;
   padding: 0;
