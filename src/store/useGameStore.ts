@@ -6,9 +6,11 @@ export type useGameStoreProps = {
   questionNumber: number;
   question: string;
   answer: string;
+  coordinates: { lat: number; lng: number };
   points: number;
   totalPoints: number;
   distance: number;
+  mapEnabled: boolean;
   setNextQuestion: () => void;
   setPoints: (lat: number, lng: number) => void;
 };
@@ -17,9 +19,14 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
   questionNumber: 0,
   question: questions[0].question,
   answer: questions[0].answer,
+  coordinates: {
+    lat: questions[0].coordinates.lat,
+    lng: questions[0].coordinates.lng,
+  },
   points: 0,
   totalPoints: 0,
   distance: 0,
+  mapEnabled: true,
 
   setNextQuestion: () =>
     set((state: useGameStoreProps) => {
@@ -29,13 +36,23 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
         questionNumber: nextIndex,
         question: questions[nextIndex].question,
         answer: questions[nextIndex].answer,
+        coordinates: {
+          lat: questions[nextIndex].coordinates.lat,
+          lng: questions[nextIndex].coordinates.lng,
+        },
+        points: 0,
         distance: 0,
+        mapEnabled: true,
       };
     }),
 
   setPoints: (lat: number, lng: number) =>
     set((state: useGameStoreProps) => {
-      const distance = getDistance(lat, lng, 43.8563, 18.4131);
+      const distance =
+        Math.round(
+          getDistance(lat, lng, state.coordinates.lat, state.coordinates.lng) *
+            100
+        ) / 100;
 
       let newPoints = 0;
       if (distance < 500) {
@@ -52,6 +69,7 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
         points: newPoints,
         totalPoints: state.totalPoints + newPoints,
         distance: distance,
+        mapEnabled: false,
       };
     }),
 }));

@@ -10,8 +10,6 @@ export default function GamePage() {
   const points = useGameStore((state) => state.points);
   const totalPoints = useGameStore((state) => state.totalPoints);
   const distance = useGameStore((state) => state.distance);
-  const setNextQuestion = useGameStore((state) => state.setNextQuestion);
-  const setPoints = useGameStore((state) => state.setPoints);
 
   return (
     <div
@@ -62,7 +60,9 @@ export default function GamePage() {
         className="bg-[linear-gradient(135deg,#4ac3af,#90bfb7)] rounded-4xl shadow-[4px_6px_6px_rgba(9,154,130)] p-2 text-2xl font-semibold font-sans flex flex-col items-center tracking-wide"
       >
         Distance
-        <span className="my-auto text-4xl">{distance} km</span>
+        <span className="my-auto text-4xl">
+          {distance === 0 ? "" : `${distance} km`}
+        </span>
       </div>
     </div>
   );
