@@ -13,6 +13,8 @@ export type useGameStoreProps = {
   mapEnabled: boolean;
   setNextQuestion: () => void;
   setPoints: (lat: number, lng: number) => void;
+  setEnableMap: () => void;
+  setDisableMap: () => void;
 };
 
 export const useGameStore = create<useGameStoreProps>((set) => ({
@@ -26,7 +28,7 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
   points: 0,
   totalPoints: 0,
   distance: 0,
-  mapEnabled: true,
+  mapEnabled: false,
 
   setNextQuestion: () =>
     set((state: useGameStoreProps) => {
@@ -42,7 +44,6 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
         },
         points: 0,
         distance: 0,
-        mapEnabled: true,
       };
     }),
 
@@ -69,7 +70,18 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
         points: newPoints,
         totalPoints: state.totalPoints + newPoints,
         distance: distance,
-        mapEnabled: false,
       };
     }),
+
+  setEnableMap: () => {
+    set((state: useGameStoreProps) => ({
+      mapEnabled: true,
+    }));
+  },
+
+  setDisableMap: () => {
+    set((state: useGameStoreProps) => ({
+      mapEnabled: false,
+    }));
+  },
 }));
