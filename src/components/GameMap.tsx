@@ -3,18 +3,20 @@
 import { useEffect, useRef, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { useGameStore } from "@/store/useGameStore";
-import type { Map, Marker } from "leaflet";
+import { Map, Marker } from "leaflet";
 
 export default function GameMap() {
   const mapEnabled = useGameStore((state) => state.mapEnabled);
   const setNextQuestion = useGameStore((state) => state.setNextQuestion);
   const setPoints = useGameStore((state) => state.setPoints);
   const setEnableMap = useGameStore((state) => state.setEnableMap);
-  const setDisableMap = useGameStore((state) => state.setDisableMap);
   const distance = useGameStore((state) => state.distance);
+  const latAnswer = useGameStore((state) => state.coordinates.lat);
+  const lngAnswer = useGameStore((state) => state.coordinates.lng);
 
   const mapRef = useRef<Map | null>(null);
-  const markerRef = useRef<Marker | null>(null);
+  const markerGuessRef = useRef<Marker | null>(null);
+  const markerAnswerRef = useRef<Marker | null>(null);
   const [newQuestionTrigger, setNewQuestionTrigger] = useState(false);
 
   useEffect(() => {
@@ -78,8 +80,13 @@ export default function GameMap() {
       function handleClick(e: any) {
         const { lat, lng } = e.latlng;
 
-        const marker = L.marker([lat, lng], { icon: redIcon }).addTo(map!);
-        markerRef.current = marker;
+        const markerGuess = L.marker([lat, lng], { icon: redIcon }).addTo(map);
+        markerGuessRef.current = markerGuess;
+        const markerAnswer = L.marker([latAnswer, lngAnswer], {
+          icon: greenIcon,
+        }).addTo(map);
+        markerAnswerRef.current = markerAnswer;
+
         setPoints(lat, lng);
         map.off("click");
       }
@@ -88,10 +95,13 @@ export default function GameMap() {
     })();
 
     return () => {
-      if (markerRef.current) {
-        markerRef.current.remove();
-        markerRef.current = null;
-        console.log("cleanuppp");
+      if (markerGuessRef.current) {
+        markerGuessRef.current.remove();
+        markerGuessRef.current = null;
+      }
+      if (markerAnswerRef.current) {
+        markerAnswerRef.current.remove();
+        markerAnswerRef.current = null;
       }
     };
   }, [mapEnabled, newQuestionTrigger]);

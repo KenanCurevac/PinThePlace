@@ -43,7 +43,7 @@ export default function GamePage() {
         style={{ gridArea: "answer" }}
         className="bg-[linear-gradient(#4ab7c3,#6dafb8)] rounded-4xl shadow-[3px_4px_6px_rgba(28,117,127)] p-2 text-2xl font-semibold font-sans flex items-center justify-center tracking-wide"
       >
-        {answer}
+        {distance !== 0 && answer}
       </div>
       <div style={{ gridArea: "map" }}>
         <GameMap />

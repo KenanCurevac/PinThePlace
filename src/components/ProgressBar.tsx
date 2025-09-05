@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface CircularProgressProps {
   value: number;
@@ -36,6 +36,10 @@ const CircularProgress = ({
   const viewBox = `-${size * 0.125} -${size * 0.125} ${size * 1.25} ${
     size * 1.25
   }`;
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {});
+  }, []);
 
   return (
     <div className="relative">
