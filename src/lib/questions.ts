@@ -38,15 +38,15 @@ export const questions: Question[] = [
   },
   {
     id: 6,
-    question: "Where is the largest statue in the world?",
-    answer: "Statue of Unity",
-    coordinates: { lat: 21.838, lng: 73.7191 },
+    question: "What is the highest point on Earth?",
+    answer: "Mount Everest",
+    coordinates: { lat: 27.9881, lng: 86.925 },
   },
   {
     id: 7,
-    question: "Where is the deepest cave in the world?",
-    answer: "Veryovkina Cave",
-    coordinates: { lat: 43.3822, lng: 40.3456 },
+    question: "What is the most populated city in the world?",
+    answer: "Tokyo",
+    coordinates: { lat: 35.6828, lng: 139.7595 },
   },
   {
     id: 8,
@@ -62,8 +62,8 @@ export const questions: Question[] = [
   },
   {
     id: 10,
-    question: "Where is the largest aquarium in the world?",
-    answer: "Chimelong Ocean Kingdom",
-    coordinates: { lat: 22.2467, lng: 113.538 },
+    question: "What is the tallest pyramid in the world?",
+    answer: "The Great Pyramid of Giza",
+    coordinates: { lat: 29.9792, lng: 31.1342 },
   },
 ];

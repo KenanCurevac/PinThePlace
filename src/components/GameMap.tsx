@@ -10,9 +10,11 @@ export default function GameMap() {
   const setNextQuestion = useGameStore((state) => state.setNextQuestion);
   const setPoints = useGameStore((state) => state.setPoints);
   const setEnableMap = useGameStore((state) => state.setEnableMap);
-  const distance = useGameStore((state) => state.distance);
+  const revealAnswer = useGameStore((state) => state.revealAnswer);
   const latAnswer = useGameStore((state) => state.coordinates.lat);
   const lngAnswer = useGameStore((state) => state.coordinates.lng);
+  const setTimerStops = useGameStore((state) => state.setTimerStops);
+  const setRevealAnswer = useGameStore((state) => state.setRevealAnswer);
 
   const mapRef = useRef<Map | null>(null);
   const markerGuessRef = useRef<Marker | null>(null);
@@ -88,6 +90,8 @@ export default function GameMap() {
         markerAnswerRef.current = markerAnswer;
 
         setPoints(lat, lng);
+        setTimerStops();
+        setRevealAnswer();
         map.off("click");
       }
 
@@ -106,9 +110,45 @@ export default function GameMap() {
     };
   }, [mapEnabled, newQuestionTrigger]);
 
+  useEffect(() => {
+    if (!mapRef.current || !revealAnswer) return;
+
+    const map = mapRef.current;
+
+    (async () => {
+      const L = await import("leaflet");
+
+      const greenIcon = L.icon({
+        iconUrl: "/pin-green.png",
+        iconSize: [30, 40],
+        iconAnchor: [15, 40],
+        popupAnchor: [0, -40],
+      });
+
+      if (markerAnswerRef.current) {
+        markerAnswerRef.current.remove();
+        markerAnswerRef.current = null;
+      }
+
+      if (revealAnswer) {
+        const markerAnswer = L.marker([latAnswer, lngAnswer], {
+          icon: greenIcon,
+        }).addTo(map);
+        markerAnswerRef.current = markerAnswer;
+      }
+    })();
+
+    return () => {
+      if (markerAnswerRef.current) {
+        markerAnswerRef.current.remove();
+        markerAnswerRef.current = null;
+      }
+    };
+  }, [revealAnswer]);
+
   return (
     <div className="relative w-full h-full">
-      {distance !== 0 && (
+      {revealAnswer && (
         <div
           className="w-1/2 h-1/7 bg-[linear-gradient(#4ab7c3,#6dafb8)] hover:bg-[linear-gradient(#4ac3af,#90bfb7)] absolute z-1000 right-0 left-0 bottom-4 mx-auto rounded-4xl shadow-[4px_6px_6px_rgba(28,117,127)] hover:shadow-[0_0_4px_6px_rgba(9,154,130)] p-1 text-3xl hover:text-[2rem] font-semibold font-sans tracking-wide flex flex-col items-center justify-center"
           onClick={() => {

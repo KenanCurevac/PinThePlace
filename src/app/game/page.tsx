@@ -10,6 +10,7 @@ export default function GamePage() {
   const points = useGameStore((state) => state.points);
   const totalPoints = useGameStore((state) => state.totalPoints);
   const distance = useGameStore((state) => state.distance);
+  const revealAnswer = useGameStore((state) => state.revealAnswer);
 
   return (
     <div
@@ -43,7 +44,7 @@ export default function GamePage() {
         style={{ gridArea: "answer" }}
         className="bg-[linear-gradient(#4ab7c3,#6dafb8)] rounded-4xl shadow-[3px_4px_6px_rgba(28,117,127)] p-2 text-2xl font-semibold font-sans flex items-center justify-center tracking-wide"
       >
-        {distance !== 0 && answer}
+        {revealAnswer && answer}
       </div>
       <div style={{ gridArea: "map" }}>
         <GameMap />

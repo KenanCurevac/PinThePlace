@@ -11,10 +11,14 @@ export type useGameStoreProps = {
   totalPoints: number;
   distance: number;
   mapEnabled: boolean;
+  timerStops: boolean;
+  revealAnswer: boolean;
   setNextQuestion: () => void;
   setPoints: (lat: number, lng: number) => void;
   setEnableMap: () => void;
   setDisableMap: () => void;
+  setTimerStops: () => void;
+  setRevealAnswer: () => void;
 };
 
 export const useGameStore = create<useGameStoreProps>((set) => ({
@@ -29,6 +33,8 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
   totalPoints: 0,
   distance: 0,
   mapEnabled: false,
+  timerStops: false,
+  revealAnswer: false,
 
   setNextQuestion: () =>
     set((state: useGameStoreProps) => {
@@ -44,6 +50,8 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
         },
         points: 0,
         distance: 0,
+        timerStops: false,
+        revealAnswer: false,
       };
     }),
 
@@ -70,6 +78,7 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
         points: newPoints,
         totalPoints: state.totalPoints + newPoints,
         distance: distance,
+        revealAnswer: true,
       };
     }),
 
@@ -83,5 +92,15 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
     set((state: useGameStoreProps) => ({
       mapEnabled: false,
     }));
+  },
+
+  setTimerStops: () => {
+    set((state: useGameStoreProps) => ({
+      timerStops: true,
+    }));
+  },
+
+  setRevealAnswer: () => {
+    set((state: useGameStoreProps) => ({ revealAnswer: true }));
   },
 }));
