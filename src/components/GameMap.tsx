@@ -65,13 +65,6 @@ export default function GameMap() {
     (async () => {
       const L = await import("leaflet");
 
-      const greenIcon = L.icon({
-        iconUrl: "/pin-green.png",
-        iconSize: [30, 40],
-        iconAnchor: [15, 40],
-        popupAnchor: [0, -40],
-      });
-
       const redIcon = L.icon({
         iconUrl: "/pin-red.png",
         iconSize: [30, 40],
@@ -84,10 +77,6 @@ export default function GameMap() {
 
         const markerGuess = L.marker([lat, lng], { icon: redIcon }).addTo(map);
         markerGuessRef.current = markerGuess;
-        const markerAnswer = L.marker([latAnswer, lngAnswer], {
-          icon: greenIcon,
-        }).addTo(map);
-        markerAnswerRef.current = markerAnswer;
 
         setPoints(lat, lng);
         setTimerStops();
@@ -102,10 +91,6 @@ export default function GameMap() {
       if (markerGuessRef.current) {
         markerGuessRef.current.remove();
         markerGuessRef.current = null;
-      }
-      if (markerAnswerRef.current) {
-        markerAnswerRef.current.remove();
-        markerAnswerRef.current = null;
       }
     };
   }, [mapEnabled, newQuestionTrigger]);
@@ -125,11 +110,6 @@ export default function GameMap() {
         popupAnchor: [0, -40],
       });
 
-      if (markerAnswerRef.current) {
-        markerAnswerRef.current.remove();
-        markerAnswerRef.current = null;
-      }
-
       if (revealAnswer) {
         const markerAnswer = L.marker([latAnswer, lngAnswer], {
           icon: greenIcon,
@@ -144,7 +124,7 @@ export default function GameMap() {
         markerAnswerRef.current = null;
       }
     };
-  }, [revealAnswer]);
+  }, [mapEnabled, revealAnswer]);
 
   return (
     <div className="relative w-full h-full">

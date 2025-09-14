@@ -97,8 +97,9 @@ const CircularProgress = ({
           className="stroke-[#4ab7c3]"
         />
       </svg>
-      <div className="absolute top-16 left-11 flex items-center justify-center text-[#4ab7c3] text-4xl font-bold">
-        10:00
+      <div className="absolute top-16 left-0 right-0 mx-auto w-fit text-[#4ab7c3] text-4xl font-bold">
+        {Math.floor(timeLeft / 10)}:
+        {String(Math.floor((timeLeft % 10) * 6)).padStart(2, "0")}
       </div>
     </div>
   );
