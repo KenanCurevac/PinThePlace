@@ -2,6 +2,14 @@ import { create } from "zustand";
 import { questions } from "@/lib/questions";
 import { getDistance } from "@/lib/distance-formula";
 
+type ReviewType = {
+  question: string;
+  answer: string;
+  coordinates: { lat: number; lng: number };
+  points: number;
+  distance: number;
+};
+
 export type useGameStoreProps = {
   questionNumber: number;
   question: string;
@@ -10,12 +18,11 @@ export type useGameStoreProps = {
   points: number;
   totalPoints: number;
   distance: number;
-  mapEnabled: boolean;
   timerStops: boolean;
   revealAnswer: boolean;
+  review: ReviewType[];
   setNextQuestion: () => void;
   setPoints: (lat: number, lng: number) => void;
-  setEnableMap: () => void;
   setTimerStops: () => void;
   setRevealAnswer: () => void;
 };
@@ -31,9 +38,9 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
   points: 0,
   totalPoints: 0,
   distance: 0,
-  mapEnabled: false,
   timerStops: false,
   revealAnswer: false,
+  review: [],
 
   setNextQuestion: () =>
     set((state: useGameStoreProps) => {
@@ -81,12 +88,6 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
       };
     }),
 
-  setEnableMap: () => {
-    set((state: useGameStoreProps) => ({
-      mapEnabled: true,
-    }));
-  },
-
   setTimerStops: () => {
     set((state: useGameStoreProps) => ({
       timerStops: true,
@@ -94,6 +95,21 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
   },
 
   setRevealAnswer: () => {
-    set((state: useGameStoreProps) => ({ revealAnswer: true }));
+    set((state: useGameStoreProps) => ({
+      revealAnswer: true,
+      review: [
+        ...state.review,
+        {
+          question: state.question,
+          answer: state.answer,
+          coordinates: {
+            lat: state.coordinates.lat,
+            lng: state.coordinates.lng,
+          },
+          points: state.points,
+          distance: state.distance,
+        },
+      ],
+    }));
   },
 }));

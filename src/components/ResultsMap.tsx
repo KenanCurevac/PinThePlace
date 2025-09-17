@@ -8,6 +8,7 @@ import { Map, Marker } from "leaflet";
 export default function ResultsMap() {
   const [enableMap, setEnableMap] = useState(false);
   const mapRef = useRef<Map | null>(null);
+  const review = useGameStore((state) => state.review);
 
   useEffect(() => {
     let map: any;
@@ -16,7 +17,7 @@ export default function ResultsMap() {
       const L = await import("leaflet");
 
       const key = "wjzrcvMblbDm0EMT5nG8";
-      map = L.map("map").setView([20, 10], 2);
+      map = L.map("resultsMap").setView([20, 10], 2);
 
       L.tileLayer(
         `https://api.maptiler.com/tiles/satellite-mediumres/{z}/{x}/{y}.png?key=${key}`,
@@ -30,10 +31,10 @@ export default function ResultsMap() {
           crossOrigin: true,
         }
       ).addTo(map);
-    })();
 
-    mapRef.current = map;
-    setEnableMap((trigger) => !trigger);
+      mapRef.current = map;
+      setEnableMap((trigger) => !trigger);
+    })();
 
     return () => {
       if (mapRef.current) {
@@ -58,9 +59,11 @@ export default function ResultsMap() {
         popupAnchor: [0, -40],
       });
 
-      //   const markerAnswer = L.marker([latAnswer, lngAnswer], {
-      //      icon: greenIcon,
-      //   }).addTo(map);
+      for (const question of review) {
+        L.marker([question.coordinates.lat, question.coordinates.lng], {
+          icon: greenIcon,
+        }).addTo(map);
+      }
     })();
 
     return () => {};
@@ -68,7 +71,7 @@ export default function ResultsMap() {
 
   return (
     <div
-      id="map"
+      id="resultsMap"
       style={{
         height: "100%",
         maxWidth: "100%",

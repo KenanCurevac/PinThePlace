@@ -4,22 +4,24 @@ import { useEffect, useRef, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { useGameStore } from "@/store/useGameStore";
 import { Map, Marker } from "leaflet";
+import Link from "next/link";
 
 export default function GameMap() {
-  const mapEnabled = useGameStore((state) => state.mapEnabled);
   const setNextQuestion = useGameStore((state) => state.setNextQuestion);
   const setPoints = useGameStore((state) => state.setPoints);
-  const setEnableMap = useGameStore((state) => state.setEnableMap);
   const revealAnswer = useGameStore((state) => state.revealAnswer);
   const latAnswer = useGameStore((state) => state.coordinates.lat);
   const lngAnswer = useGameStore((state) => state.coordinates.lng);
   const setTimerStops = useGameStore((state) => state.setTimerStops);
   const setRevealAnswer = useGameStore((state) => state.setRevealAnswer);
+  const questionNumber = useGameStore((state) => state.questionNumber);
 
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null);
   const markerGuessRef = useRef<Marker | null>(null);
   const markerAnswerRef = useRef<Marker | null>(null);
   const [newQuestionTrigger, setNewQuestionTrigger] = useState(false);
+  const [mapEnabled, setMapEnabled] = useState(false);
 
   useEffect(() => {
     let map: any;
@@ -44,7 +46,7 @@ export default function GameMap() {
       ).addTo(map);
 
       mapRef.current = map;
-      setEnableMap();
+      setMapEnabled(true);
     })();
 
     return () => {
@@ -128,7 +130,7 @@ export default function GameMap() {
 
   return (
     <div className="relative w-full h-full">
-      {revealAnswer && (
+      {revealAnswer && questionNumber < 9 && (
         <div
           className="w-1/2 h-1/7 bg-[linear-gradient(#4ab7c3,#6dafb8)] hover:bg-[linear-gradient(#4ac3af,#90bfb7)] absolute z-1000 right-0 left-0 bottom-4 mx-auto rounded-4xl shadow-[4px_6px_6px_rgba(28,117,127)] hover:shadow-[0_0_4px_6px_rgba(9,154,130)] p-1 text-3xl hover:text-[2rem] font-semibold font-sans tracking-wide flex flex-col items-center justify-center"
           onClick={() => {
@@ -138,6 +140,14 @@ export default function GameMap() {
         >
           Next Question
         </div>
+      )}
+      {revealAnswer && questionNumber === 9 && (
+        <Link
+          href="/results"
+          className="w-1/2 h-1/7 bg-[linear-gradient(#4ab7c3,#6dafb8)] hover:bg-[linear-gradient(#4ac3af,#90bfb7)] absolute z-1000 right-0 left-0 bottom-4 mx-auto rounded-4xl shadow-[4px_6px_6px_rgba(28,117,127)] hover:shadow-[0_0_4px_6px_rgba(9,154,130)] p-1 text-3xl hover:text-[2rem] font-semibold font-sans tracking-wide flex flex-col items-center justify-center"
+        >
+          Review Game
+        </Link>
       )}
       <div
         id="map"
