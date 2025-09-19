@@ -19,10 +19,10 @@ export default function Results() {
         className="text-8xl text-[#4ab7c3] my-auto font-semibold text-center font-sans"
         style={{ gridArea: "message" }}
       >
-        Great job, Traveler!
+        Great job Traveler!
       </div>
       <div
-        className="bg-[linear-gradient(165deg,#18838f,#4ab7c3)] rounded-4xl drop-shadow-[2px_2px_4px_black] text-4xl font-semibold text-center font-sans p-2 text-[#01272d]"
+        className="bg-[linear-gradient(135deg,#4ac3af,#7bd8cc)] rounded-4xl drop-shadow-[2px_2px_4px_black] text-4xl font-semibold text-center font-sans p-2 text-[#01272d]"
         style={{ gridArea: "points" }}
       >
         Total Points: <span className="text-8xl my-auto ">10</span>
@@ -35,7 +35,7 @@ export default function Results() {
         className="flex flex-col justify-between"
       >
         <Review />
-        <button className="w-96 h-16 mb-6 bg-[linear-gradient(165deg,#18838f,#4ab7c3)] text-black text-2xl font-bold tracking-wider rounded-3xl mx-auto">
+        <button className="w-96 h-16 mb-6 bg-[linear-gradient(165deg,#18838f,#4ab7c3)] text-black text-2xl font-bold tracking-wider rounded-3xl mx-auto drop-shadow-[2px_2px_4px_black]">
           PLAY AGAIN
         </button>
       </div>

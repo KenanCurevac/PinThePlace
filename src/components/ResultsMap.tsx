@@ -76,7 +76,7 @@ export default function ResultsMap() {
         height: "100%",
         maxWidth: "100%",
       }}
-      className="rounded-4xl border-white border-4"
+      className="rounded-3xl border-white border-4"
     ></div>
   );
 }

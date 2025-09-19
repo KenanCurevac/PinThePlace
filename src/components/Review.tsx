@@ -7,9 +7,12 @@ export default function Review() {
   const review = useGameStore((state) => state.review);
 
   return (
-    <ScrollArea className="h-80 w-full rounded-2xl bg-[linear-gradient(165deg,#18838f,#4ab7c3)] font-sans">
+    <ScrollArea
+      type="always"
+      className="h-80 w-full rounded-2xl bg-[linear-gradient(165deg,#18838f,#4ab7c3)] font-sans drop-shadow-[2px_2px_4px_black] overflow-visible"
+    >
       <div className="p-4">
-        <h4 className="mb-5 leading-none text-center text-4xl font-semibold tracking-wide">
+        <h4 className="mb-4 leading-none text-center text-4xl font-semibold tracking-wide">
           Review
         </h4>
         {review.map((question) => {
@@ -23,11 +26,15 @@ export default function Review() {
                 {question.questionNumber}. {question.question}
               </div>
               <div className="w-full h-[0.75px] bg-white"></div>
-              <div className="ml-2">{question.answer}</div>
+              <div className="text-center">{question.answer}</div>
               <div className="w-full h-[0.75px] bg-white"></div>
               <div className="flex justify-around">
-                <span>Points: {question.points}</span>
-                <span>Distance: {question.distance} km</span>
+                <span className="w-[50%] text-center">
+                  Points: {question.points}
+                </span>
+                <span className="w-[50%] text-center">
+                  Distance: {question.distance} km
+                </span>
               </div>
             </div>
           );

@@ -26,7 +26,7 @@ export default function GamePage() {
     >
       <div
         style={{ gridArea: "question" }}
-        className="bg-[linear-gradient(#4ab7c3,#6dafb8)] rounded-4xl shadow-[3px_4px_6px_rgba(28,117,127)] min-h-[72px] p-2 text-xl font-semibold font-sans text-center tracking-wide"
+        className="bg-[linear-gradient(175deg,#18838f,#4ab7c3)] rounded-4xl drop-shadow-[2px_2px_4px_black] min-h-[72px] p-2 text-xl font-semibold font-sans text-center tracking-wide"
       >
         {question}
       </div>
@@ -35,14 +35,14 @@ export default function GamePage() {
       </div>
       <div
         style={{ gridArea: "totalPoints" }}
-        className="bg-[linear-gradient(#4ac3af,#90bfb7)] rounded-4xl shadow-[3px_4px_6px_rgba(9,154,130)] p-1 text-xl font-semibold font-sans tracking-wide flex flex-col items-center justify-start"
+        className="bg-[linear-gradient(175deg,#4ac3af,#7bd8cc)] rounded-4xl drop-shadow-[2px_2px_4px_black] p-1 text-xl font-semibold font-sans tracking-wide flex flex-col items-center justify-start"
       >
         Total Points
         <span className="text-3xl">{totalPoints}</span>
       </div>
       <div
         style={{ gridArea: "answer" }}
-        className="bg-[linear-gradient(#4ab7c3,#6dafb8)] rounded-4xl shadow-[3px_4px_6px_rgba(28,117,127)] p-2 text-2xl font-semibold font-sans flex items-center justify-center tracking-wide"
+        className="bg-[linear-gradient(175deg,#18838f,#4ab7c3)] rounded-4xl drop-shadow-[2px_2px_4px_black] p-2 text-2xl font-semibold font-sans flex items-center justify-center tracking-wide"
       >
         {revealAnswer && answer}
       </div>
@@ -51,14 +51,14 @@ export default function GamePage() {
       </div>
       <div
         style={{ gridArea: "points" }}
-        className="bg-[linear-gradient(135deg,#4ac3af,#90bfb7)] rounded-4xl shadow-[4px_6px_6px_rgba(9,154,130)] p-2 text-2xl font-semibold font-sans flex flex-col items-center tracking-wide"
+        className="bg-[linear-gradient(135deg,#4ac3af,#7bd8cc)] rounded-4xl drop-shadow-[2px_2px_4px_black] p-2 text-2xl font-semibold font-sans flex flex-col items-center tracking-wide"
       >
         Points
         <span className="my-auto text-8xl">{points}</span>
       </div>
       <div
         style={{ gridArea: "distance" }}
-        className="bg-[linear-gradient(135deg,#4ac3af,#90bfb7)] rounded-4xl shadow-[4px_6px_6px_rgba(9,154,130)] p-2 text-2xl font-semibold font-sans flex flex-col items-center tracking-wide"
+        className="bg-[linear-gradient(135deg,#4ac3af,#7bd8cc)] rounded-4xl drop-shadow-[2px_2px_4px_black] p-2 text-2xl font-semibold font-sans flex flex-col items-center tracking-wide"
       >
         Distance
         <span className="my-auto text-4xl">
