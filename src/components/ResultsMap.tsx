@@ -53,16 +53,30 @@ export default function ResultsMap() {
       const L = await import("leaflet");
 
       const greenIcon = L.icon({
-        iconUrl: "/pin-green.png",
+        iconUrl: "/green-pin.png",
         iconSize: [30, 40],
         iconAnchor: [15, 40],
         popupAnchor: [0, -40],
       });
 
       for (const question of review) {
-        L.marker([question.coordinates.lat, question.coordinates.lng], {
-          icon: greenIcon,
-        }).addTo(map);
+        const marker = L.marker(
+          [question.coordinates.lat, question.coordinates.lng],
+          {
+            icon: greenIcon,
+          }
+        ).addTo(map);
+
+        marker.bindTooltip(`${question.answer}`, {
+          permanent: false,
+          direction: "top",
+          offset: [0, -33],
+          className: "marker-tooltip",
+        });
+
+        marker.on("click", () => {
+          console.log("Marker clicked");
+        });
       }
     })();
 
@@ -76,7 +90,7 @@ export default function ResultsMap() {
         height: "100%",
         maxWidth: "100%",
       }}
-      className="rounded-3xl border-white border-4"
+      className="rounded-3xl border-[#4ab7c3] border-4"
     ></div>
   );
 }

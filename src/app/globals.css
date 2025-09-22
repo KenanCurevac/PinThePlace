@@ -19,3 +19,17 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.marker-tooltip.leaflet-tooltip {
+  background-color: #004551;
+  border-color: white;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 6px 8px;
+  border-radius: 12px;
+}
+
+.leaflet-tooltip::before {
+  display: none !important;
+}

@@ -121,10 +121,12 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
 
       let newPoints = 0;
       if (distance < 500) {
-        newPoints = 4;
+        newPoints = 5;
       } else if (distance < 1000) {
-        newPoints = 3;
+        newPoints = 4;
       } else if (distance < 2000) {
+        newPoints = 3;
+      } else if (distance < 3000) {
         newPoints = 2;
       } else if (distance < 4000) {
         newPoints = 1;

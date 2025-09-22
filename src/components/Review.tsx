@@ -16,11 +16,10 @@ export default function Review() {
           Review
         </h4>
         {review.map((question) => {
-          console.log(question.question);
           return (
             <div
               key={question.questionNumber}
-              className="bg-[#004551] mb-4 text-3xl p-3 text-white rounded-3xl flex flex-col gap-2"
+              className="bg-[#004551] mb-4 text-3xl p-4 text-white rounded-3xl flex flex-col gap-2"
             >
               <div>
                 {question.questionNumber}. {question.question}

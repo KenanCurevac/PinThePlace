@@ -16,7 +16,6 @@ export default function GameMap() {
   const setRevealAnswer = useGameStore((state) => state.setRevealAnswer);
   const questionNumber = useGameStore((state) => state.questionNumber);
 
-  const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null);
   const markerGuessRef = useRef<Marker | null>(null);
   const markerAnswerRef = useRef<Marker | null>(null);
@@ -68,7 +67,7 @@ export default function GameMap() {
       const L = await import("leaflet");
 
       const redIcon = L.icon({
-        iconUrl: "/pin-red.png",
+        iconUrl: "/red-pin.png",
         iconSize: [30, 40],
         iconAnchor: [15, 40],
         popupAnchor: [0, -40],
@@ -86,6 +85,7 @@ export default function GameMap() {
         map.off("click");
       }
 
+      map.setView([20, 10], 2);
       map.on("click", handleClick);
     })();
 
@@ -106,7 +106,7 @@ export default function GameMap() {
       const L = await import("leaflet");
 
       const greenIcon = L.icon({
-        iconUrl: "/pin-green.png",
+        iconUrl: "/green-pin.png",
         iconSize: [30, 40],
         iconAnchor: [15, 40],
         popupAnchor: [0, -40],
@@ -132,7 +132,7 @@ export default function GameMap() {
     <div className="relative w-full h-full">
       {revealAnswer && questionNumber < 9 && (
         <div
-          className="w-1/2 h-1/7 bg-[linear-gradient(#4ab7c3,#6dafb8)] hover:bg-[linear-gradient(#4ac3af,#90bfb7)] absolute z-1000 right-0 left-0 bottom-4 mx-auto rounded-4xl drop-shadow-[2px_2px_4px_black] hover:shadow-[0_0_4px_6px_rgba(9,154,130)] p-1 text-3xl hover:text-[2rem] font-semibold font-sans tracking-wide flex flex-col items-center justify-center"
+          className="w-1/2 h-1/7 bg-[linear-gradient(175deg,#18838f,#4ab7c3)] hover:bg-[linear-gradient(175deg,#4ac3af,#7bd8cc)] absolute z-1000 right-0 left-0 bottom-4 mx-auto rounded-4xl drop-shadow-[2px_2px_4px_black] p-1 text-3xl hover:text-[2rem] font-semibold font-sans tracking-wide flex flex-col items-center justify-center cursor-pointer"
           onClick={() => {
             setNextQuestion();
             setNewQuestionTrigger((trigger) => !trigger);
@@ -144,7 +144,7 @@ export default function GameMap() {
       {revealAnswer && questionNumber === 9 && (
         <Link
           href="/results"
-          className="w-1/2 h-1/7 bg-[linear-gradient(#4ab7c3,#6dafb8)] hover:bg-[linear-gradient(#4ac3af,#90bfb7)] absolute z-1000 right-0 left-0 bottom-4 mx-auto rounded-4xl drop-shadow-[2px_2px_4px_black] hover:shadow-[0_0_4px_6px_rgba(9,154,130)] p-1 text-3xl hover:text-[2rem] font-semibold font-sans tracking-wide flex flex-col items-center justify-center"
+          className="w-1/2 h-1/7 bg-[linear-gradient(175deg,#18838f,#4ab7c3)] hover:bg-[linear-gradient(175deg,#4ac3af,#7bd8cc)] absolute z-1000 right-0 left-0 bottom-4 mx-auto rounded-4xl drop-shadow-[2px_2px_4px_black] p-1 text-3xl hover:text-[2rem] font-semibold font-sans tracking-wide flex flex-col items-center justify-center cursor-pointer"
         >
           Review Game
         </Link>
@@ -155,8 +155,8 @@ export default function GameMap() {
           height: "100%",
           maxWidth: "100%",
         }}
-        className="border-white border-4"
-      ></div>
+        className="border-[#4ab7c3] border-4 rounded-xl !cursor-crosshair"
+      />
     </div>
   );
 }

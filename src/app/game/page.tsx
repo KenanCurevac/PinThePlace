@@ -14,7 +14,7 @@ export default function GamePage() {
 
   return (
     <div
-      className="h-screen grid grid-rows-[1fr_1fr_4fr_4fr] grid-cols-[1fr_4fr_1fr] gap-4 p-8"
+      className="h-screen grid grid-rows-[1fr_1fr_4fr_4fr] grid-cols-[1fr_4fr_1fr] gap-4 p-8 cursor-default"
       style={{
         gridTemplateAreas: `
         "question question timer"

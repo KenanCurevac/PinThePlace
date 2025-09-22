@@ -37,7 +37,7 @@ const CircularProgress = ({
           }
           return 0;
         } else {
-          return prevTime - 0.1;
+          return prevTime - 0.06666;
         }
       });
     }, 10);
@@ -98,7 +98,7 @@ const CircularProgress = ({
         />
       </svg>
       <div className="absolute top-16 left-0 right-0 mx-auto w-fit text-[#4ab7c3] text-4xl font-bold">
-        {Math.floor(timeLeft / 10)}:
+        {Math.floor(timeLeft / 6.666)}:
         {String(Math.floor((timeLeft % 10) * 6)).padStart(2, "0")}
       </div>
     </div>

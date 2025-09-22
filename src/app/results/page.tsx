@@ -4,7 +4,7 @@ import Review from "@/components/Review";
 export default function Results() {
   return (
     <div
-      className="h-screen grid grid-rows-[1fr_3fr] grid-cols-[auto_2fr_1fr_1fr] gap-8 p-10"
+      className="h-screen grid grid-rows-[1fr_3fr] grid-cols-[auto_2fr_1fr_1fr] gap-8 p-10 cursor-default"
       style={{
         gridTemplateAreas: `"logo message message points" "map map review review"`,
       }}
@@ -35,7 +35,7 @@ export default function Results() {
         className="flex flex-col justify-between"
       >
         <Review />
-        <button className="w-96 h-16 mb-6 bg-[linear-gradient(165deg,#18838f,#4ab7c3)] text-black text-2xl font-bold tracking-wider rounded-3xl mx-auto drop-shadow-[2px_2px_4px_black]">
+        <button className="w-96 h-16 mb-6 bg-[linear-gradient(165deg,#18838f,#4ab7c3)] hover:bg-[linear-gradient(175deg,#4ac3af,#7bd8cc)] text-black text-2xl hover:text-[1.75rem] font-bold tracking-wider rounded-3xl mx-auto drop-shadow-[2px_2px_4px_black] cursor-pointer">
           PLAY AGAIN
         </button>
       </div>
