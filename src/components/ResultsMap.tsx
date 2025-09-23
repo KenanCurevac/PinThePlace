@@ -9,6 +9,7 @@ export default function ResultsMap() {
   const [enableMap, setEnableMap] = useState(false);
   const mapRef = useRef<Map | null>(null);
   const review = useGameStore((state) => state.review);
+  const setScrollTo = useGameStore((state) => state.setScrollTo);
 
   useEffect(() => {
     let map: any;
@@ -76,6 +77,7 @@ export default function ResultsMap() {
 
         marker.on("click", () => {
           console.log("Marker clicked");
+          setScrollTo(question.questionNumber);
         });
       }
     })();

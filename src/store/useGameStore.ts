@@ -22,10 +22,12 @@ export type useGameStoreProps = {
   timerStops: boolean;
   revealAnswer: boolean;
   review: ReviewType[];
+  scrollTo: null | number;
   setNextQuestion: () => void;
   setPoints: (lat: number, lng: number) => void;
   setTimerStops: () => void;
   setRevealAnswer: () => void;
+  setScrollTo: (questionNum: number) => void;
 };
 
 export const useGameStore = create<useGameStoreProps>((set) => ({
@@ -41,56 +43,8 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
   distance: 0,
   timerStops: false,
   revealAnswer: false,
-  review: [
-    {
-      questionNumber: 1,
-      question: "Where is the oldest continuously inhabited city in the world?",
-      answer: "Damascus",
-      coordinates: { lat: 33.5138, lng: 36.2765 },
-      points: 0,
-      distance: 2500,
-    },
-    {
-      questionNumber: 2,
-      question: "Where is the highest waterfall in the world?",
-      answer: "Angel Falls",
-      coordinates: { lat: 5.967, lng: -62.536 },
-      points: 0,
-      distance: 2500,
-    },
-    {
-      questionNumber: 3,
-      question: "Where is the largest volcano in the world?",
-      answer: "Mauna Loa",
-      coordinates: { lat: 19.4756, lng: -155.6082 },
-      points: 0,
-      distance: 2500,
-    },
-    {
-      questionNumber: 4,
-      question: "Where is the deepest ocean trench in the world?",
-      answer: "Mariana Trench",
-      coordinates: { lat: 11.35, lng: 142.2 },
-      points: 0,
-      distance: 2500,
-    },
-    {
-      questionNumber: 5,
-      question: "Where is the tallest building in the world?",
-      answer: "Burj Khalifa",
-      coordinates: { lat: 25.1972, lng: 55.2744 },
-      points: 0,
-      distance: 2500,
-    },
-    {
-      questionNumber: 6,
-      question: "What is the highest point on Earth?",
-      answer: "Mount Everest",
-      coordinates: { lat: 27.9881, lng: 86.925 },
-      points: 0,
-      distance: 2500,
-    },
-  ],
+  scrollTo: null,
+  review: [],
 
   setNextQuestion: () =>
     set((state: useGameStoreProps) => {
@@ -164,5 +118,9 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
         },
       ],
     }));
+  },
+
+  setScrollTo: (questionNum) => {
+    set((state) => ({ scrollTo: questionNum }));
   },
 }));
