@@ -1,6 +1,8 @@
 import { create } from "zustand";
-import { questions } from "@/lib/questions";
+import { getSelectedQuestions } from "@/lib/question-picker";
 import { getDistance } from "@/lib/distance-formula";
+
+const selectedQuestions = getSelectedQuestions();
 
 type ReviewType = {
   questionNumber: number;
@@ -31,12 +33,12 @@ export type useGameStoreProps = {
 };
 
 export const useGameStore = create<useGameStoreProps>((set) => ({
-  questionNumber: 0,
-  question: questions[0].question,
-  answer: questions[0].answer,
+  questionNumber: 1,
+  question: selectedQuestions[0].question,
+  answer: selectedQuestions[0].answer,
   coordinates: {
-    lat: questions[0].coordinates.lat,
-    lng: questions[0].coordinates.lng,
+    lat: selectedQuestions[0].coordinates.lat,
+    lng: selectedQuestions[0].coordinates.lng,
   },
   points: 0,
   totalPoints: 0,
@@ -52,11 +54,11 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
 
       return {
         questionNumber: nextIndex,
-        question: questions[nextIndex].question,
-        answer: questions[nextIndex].answer,
+        question: selectedQuestions[nextIndex].question,
+        answer: selectedQuestions[nextIndex].answer,
         coordinates: {
-          lat: questions[nextIndex].coordinates.lat,
-          lng: questions[nextIndex].coordinates.lng,
+          lat: selectedQuestions[nextIndex].coordinates.lat,
+          lng: selectedQuestions[nextIndex].coordinates.lng,
         },
         points: 0,
         distance: 0,
@@ -123,4 +125,6 @@ export const useGameStore = create<useGameStoreProps>((set) => ({
   setScrollTo: (questionNum) => {
     set((state) => ({ scrollTo: questionNum }));
   },
+
+  setSelectedQuestions: () => {},
 }));

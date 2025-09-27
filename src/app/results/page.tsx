@@ -1,5 +1,6 @@
 import ResultsMap from "@/components/ResultsMap";
 import Review from "@/components/Review";
+import TotalPointsCard from "@/components/TotalPointsCard";
 
 export default function Results() {
   return (
@@ -21,11 +22,8 @@ export default function Results() {
       >
         Great job Traveler!
       </div>
-      <div
-        className="bg-[linear-gradient(135deg,#4ac3af,#7bd8cc)] rounded-4xl drop-shadow-[2px_2px_4px_black] text-4xl font-semibold text-center font-sans p-2 text-[#01272d]"
-        style={{ gridArea: "points" }}
-      >
-        Total Points: <span className="text-8xl my-auto ">10</span>
+      <div style={{ gridArea: "points" }}>
+        <TotalPointsCard />
       </div>
       <div style={{ gridArea: "map" }}>
         <ResultsMap />

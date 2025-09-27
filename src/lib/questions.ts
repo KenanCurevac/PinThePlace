@@ -1,11 +1,6 @@
-type Question = {
-  id: number;
-  question: string;
-  answer: string;
-  coordinates: { lat: number; lng: number };
-};
+import { Question } from "./QuestionTypes";
 
-export const questions: Question[] = [
+export const allQuestions: Question[] = [
   {
     id: 1,
     question: "Where is the oldest continuously inhabited city in the world?",

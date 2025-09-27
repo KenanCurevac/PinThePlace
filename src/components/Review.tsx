@@ -40,7 +40,7 @@ export default function Review() {
               }}
             >
               <div>
-                {question.questionNumber + 1}. {question.question}
+                {question.questionNumber}. {question.question}
               </div>
               <div className="w-full h-[0.75px] bg-white"></div>
               <div className="text-center">{question.answer}</div>
