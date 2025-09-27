@@ -1,3 +1,4 @@
+import PlayButton from "@/components/PlayButton";
 import ResultsMap from "@/components/ResultsMap";
 import Review from "@/components/Review";
 import TotalPointsCard from "@/components/TotalPointsCard";
@@ -33,9 +34,7 @@ export default function Results() {
         className="flex flex-col justify-between"
       >
         <Review />
-        <button className="w-96 h-16 mb-6 bg-[linear-gradient(165deg,#18838f,#4ab7c3)] hover:bg-[linear-gradient(175deg,#4ac3af,#7bd8cc)] text-black text-2xl hover:text-[1.75rem] font-bold tracking-wider rounded-3xl mx-auto drop-shadow-[2px_2px_4px_black] cursor-pointer">
-          PLAY AGAIN
-        </button>
+        <PlayButton type="Again" />
       </div>
     </div>
   );

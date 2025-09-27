@@ -1,4 +1,4 @@
-import Link from "next/link";
+import PlayButton from "@/components/PlayButton";
 
 export default function Home() {
   return (
@@ -10,12 +10,7 @@ export default function Home() {
             alt="Pin the Place Logo"
             className="w-44 py-10"
           />
-          <Link
-            href="/game"
-            className="w-56 h-14 bg-[linear-gradient(175deg,#18838f,#4ab7c3)] hover:bg-[linear-gradient(175deg,#4ac3af,#7bd8cc)] text-black text-2xl hover:text-[1.6rem] font-bold tracking-widest rounded-3xl my-auto flex justify-center items-center"
-          >
-            PLAY
-          </Link>
+          <PlayButton type="First" />
           <div
             className="text-7xl text-white mb-20"
             style={{ fontFamily: "'Pinyon Script', cursive" }}

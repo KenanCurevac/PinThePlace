@@ -81,7 +81,7 @@ export default function GameMap() {
 
         setPoints(lat, lng);
         setTimerStops();
-        setRevealAnswer();
+        setRevealAnswer("Answered");
         map.off("click");
       }
 
@@ -130,7 +130,7 @@ export default function GameMap() {
 
   return (
     <div className="relative w-full h-full">
-      {revealAnswer && questionNumber < 10 && (
+      {revealAnswer && questionNumber < 9 && (
         <div
           className="w-1/2 h-1/7 bg-[linear-gradient(175deg,#18838f,#4ab7c3)] hover:bg-[linear-gradient(175deg,#4ac3af,#7bd8cc)] absolute z-1000 right-0 left-0 bottom-4 mx-auto rounded-4xl drop-shadow-[2px_2px_4px_black] p-1 text-3xl hover:text-[2rem] font-semibold font-sans tracking-wide flex flex-col items-center justify-center cursor-pointer"
           onClick={() => {
@@ -141,7 +141,7 @@ export default function GameMap() {
           Next Question
         </div>
       )}
-      {revealAnswer && questionNumber === 10 && (
+      {revealAnswer && questionNumber === 9 && (
         <Link
           href="/results"
           className="w-1/2 h-1/7 bg-[linear-gradient(175deg,#18838f,#4ab7c3)] hover:bg-[linear-gradient(175deg,#4ac3af,#7bd8cc)] absolute z-1000 right-0 left-0 bottom-4 mx-auto rounded-4xl drop-shadow-[2px_2px_4px_black] p-1 text-3xl hover:text-[2rem] font-semibold font-sans tracking-wide flex flex-col items-center justify-center cursor-pointer"

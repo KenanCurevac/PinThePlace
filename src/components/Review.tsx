@@ -40,7 +40,7 @@ export default function Review() {
               }}
             >
               <div>
-                {question.questionNumber}. {question.question}
+                {question.questionNumber + 1}. {question.question}
               </div>
               <div className="w-full h-[0.75px] bg-white"></div>
               <div className="text-center">{question.answer}</div>
@@ -50,7 +50,8 @@ export default function Review() {
                   Points: {question.points}
                 </span>
                 <span className="w-[50%] text-center">
-                  Distance: {question.distance} km
+                  Distance: {question.distance}{" "}
+                  {question.distance === "Skipped" ? "" : "km"}
                 </span>
               </div>
             </div>

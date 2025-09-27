@@ -53,7 +53,7 @@ const CircularProgress = ({
 
   useEffect(() => {
     if (timeLeft <= 0) {
-      setRevealAnswer();
+      setRevealAnswer("Skipped");
     }
   }, [timeLeft]);
 
