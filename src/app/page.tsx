@@ -1,5 +1,8 @@
 import PlayButton from "@/components/PlayButton";
 import Image from "next/image";
+import { Pinyon_Script } from "next/font/google";
+
+const pinyon = Pinyon_Script({ subsets: ["latin"], weight: "400" });
 
 export default function Home() {
   return (
@@ -14,10 +17,7 @@ export default function Home() {
             className="w-44 py-10"
           />
           <PlayButton type="First" />
-          <div
-            className="text-7xl text-white mb-20"
-            style={{ fontFamily: "'Pinyon Script', cursive" }}
-          >
+          <div className={`text-7xl text-white mb-20 ${pinyon.className}`}>
             Pin the Place
           </div>
         </div>

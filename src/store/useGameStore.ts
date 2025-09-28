@@ -112,23 +112,26 @@ export const useGameStore = create<useGameStoreProps>((set) => {
     },
 
     setRevealAnswer: (response: string) => {
-      set((state: useGameStoreProps) => ({
-        revealAnswer: true,
-        review: [
-          ...state.review,
-          {
-            questionNumber: state.questionNumber,
-            question: state.question,
-            answer: state.answer,
-            coordinates: {
-              lat: state.coordinates.lat,
-              lng: state.coordinates.lng,
+      set((state: useGameStoreProps) => {
+        console.log("adding to review");
+        return {
+          revealAnswer: true,
+          review: [
+            ...state.review,
+            {
+              questionNumber: state.questionNumber,
+              question: state.question,
+              answer: state.answer,
+              coordinates: {
+                lat: state.coordinates.lat,
+                lng: state.coordinates.lng,
+              },
+              points: state.points,
+              distance: response === "Skipped" ? "Skipped" : state.distance,
             },
-            points: state.points,
-            distance: response === "Skipped" ? "Skipped" : state.distance,
-          },
-        ],
-      }));
+          ],
+        };
+      });
     },
 
     setScrollTo: (questionNum) => {

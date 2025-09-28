@@ -17,6 +17,7 @@ const CircularProgress = ({
   const questionNumber = useGameStore((state) => state.questionNumber);
   const timerStops = useGameStore((state) => state.timerStops);
   const setRevealAnswer = useGameStore((state) => state.setRevealAnswer);
+  const revealAnswer = useGameStore((state) => state.revealAnswer);
 
   const timerRef = useRef<number | null>(null);
 
@@ -52,7 +53,7 @@ const CircularProgress = ({
   }, [questionNumber]);
 
   useEffect(() => {
-    if (timeLeft <= 0) {
+    if (timeLeft <= 0 && !revealAnswer) {
       setRevealAnswer("Skipped");
     }
   }, [timeLeft]);
