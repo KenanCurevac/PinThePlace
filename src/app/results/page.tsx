@@ -2,6 +2,7 @@ import PlayButton from "@/components/PlayButton";
 import ResultsMap from "@/components/ResultsMap";
 import Review from "@/components/Review";
 import TotalPointsCard from "@/components/TotalPointsCard";
+import Image from "next/image";
 
 export default function Results() {
   return (
@@ -11,7 +12,7 @@ export default function Results() {
         gridTemplateAreas: `"logo message message points" "map map review review"`,
       }}
     >
-      <img
+      <Image
         src="/logo-ptp.png"
         className=" h-[185px] object-contain drop-shadow-[2px_2px_4px_black] ml-8"
         style={{ gridArea: "logo" }}

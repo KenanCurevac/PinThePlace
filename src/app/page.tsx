@@ -1,11 +1,12 @@
 import PlayButton from "@/components/PlayButton";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <div>
       <div className="min-h-screen bg-[url('/earth-at-night.jpg')] bg-cover bg-center ">
         <div className="flex flex-col items-center mx-auto h-screen">
-          <img
+          <Image
             src="/logo-ptp.png"
             alt="Pin the Place Logo"
             className="w-44 py-10"
