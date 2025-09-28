@@ -12,7 +12,7 @@ export default function ResultsMap() {
   const setScrollTo = useGameStore((state) => state.setScrollTo);
 
   useEffect(() => {
-    let map: any;
+    let map: import("leaflet").Map;
 
     (async () => {
       const L = await import("leaflet");

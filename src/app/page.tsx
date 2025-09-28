@@ -8,6 +8,8 @@ export default function Home() {
         <div className="flex flex-col items-center mx-auto h-screen">
           <Image
             src="/logo-ptp.png"
+            width={647}
+            height={630}
             alt="Pin the Place Logo"
             className="w-44 py-10"
           />

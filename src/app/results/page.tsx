@@ -14,7 +14,9 @@ export default function Results() {
     >
       <Image
         src="/logo-ptp.png"
-        className=" h-[185px] object-contain drop-shadow-[2px_2px_4px_black] ml-8"
+        width={647}
+        height={630}
+        className=" h-[185px] w-auto object-contain drop-shadow-[2px_2px_4px_black] ml-8"
         style={{ gridArea: "logo" }}
         alt="Pin the Place Logo"
       />

@@ -23,7 +23,7 @@ export default function GameMap() {
   const [mapEnabled, setMapEnabled] = useState(false);
 
   useEffect(() => {
-    let map: any;
+    let map: import("leaflet").Map;
 
     (async () => {
       const L = await import("leaflet");
@@ -72,8 +72,7 @@ export default function GameMap() {
         iconAnchor: [15, 40],
         popupAnchor: [0, -40],
       });
-
-      function handleClick(e: any) {
+      function handleClick(e: L.LeafletMouseEvent) {
         const { lat, lng } = e.latlng;
 
         const markerGuess = L.marker([lat, lng], { icon: redIcon }).addTo(map);
