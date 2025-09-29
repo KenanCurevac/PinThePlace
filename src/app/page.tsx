@@ -14,10 +14,12 @@ export default function Home() {
             width={647}
             height={630}
             alt="Pin the Place Logo"
-            className="w-44 py-10"
+            className="w-44 md:w-52 lg:w-60 py-10"
           />
           <PlayButton type="First" />
-          <div className={`text-7xl text-white mb-20 ${pinyon.className}`}>
+          <div
+            className={`text-7xl lg:text-8xl text-white mb-20 ${pinyon.className}`}
+          >
             Pin the Place
           </div>
         </div>

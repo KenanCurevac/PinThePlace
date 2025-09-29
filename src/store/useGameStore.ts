@@ -113,7 +113,6 @@ export const useGameStore = create<useGameStoreProps>((set) => {
 
     setRevealAnswer: (response: string) => {
       set((state: useGameStoreProps) => {
-        console.log("adding to review");
         return {
           revealAnswer: true,
           review: [
