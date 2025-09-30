@@ -13,7 +13,7 @@ export default function GamePage() {
   const revealAnswer = useGameStore((state) => state.revealAnswer);
 
   return (
-    <div className="game-grid h-[100dvh] overflow-y-hidden grid grid-rows-[1fr_1fr_8fr] md:grid-rows-[1fr_1fr_4fr_4fr] grid-cols-[1fr_1fr_1fr_1fr] md:grid-cols-[1fr_4fr_0.5fr] lg:grid-cols-[1fr_4fr_1fr] gap-3 lg:gap-4 p-4 md:p-6 lg:p-8 cursor-default">
+    <div className="game-grid h-[100dvh] overflow-y-hidden grid grid-rows-[1fr_1fr_8fr] md:grid-rows-[1fr_1fr_4fr_4fr] grid-cols-[1fr_1fr_1fr_1fr] md:grid-cols-[1fr_4fr_0.5fr] lg:grid-cols-[1fr_4fr_1fr] gap-2 md:gap-3 lg:gap-4 p-3 md:p-6 lg:p-8 cursor-default">
       <div
         style={{ gridArea: "question" }}
         className="bg-[linear-gradient(175deg,#18838f,#4ab7c3)] rounded-4xl drop-shadow-[2px_2px_4px_black] min-h-[72px] p-2 text-base md:text-lg lg:text-xl font-semibold font-sans text-center tracking-wide"
