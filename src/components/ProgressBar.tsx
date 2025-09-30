@@ -10,7 +10,11 @@ interface CircularProgressProps {
   showLabel?: boolean;
 }
 
-const CircularProgress = ({ size, strokeWidth }: CircularProgressProps) => {
+const CircularProgress = ({
+  size,
+  strokeWidth,
+  showLabel,
+}: CircularProgressProps) => {
   const [timeLeft, setTimeLeft] = useState(100);
   const questionNumber = useGameStore((state) => state.questionNumber);
   const timerStops = useGameStore((state) => state.timerStops);
@@ -96,10 +100,12 @@ const CircularProgress = ({ size, strokeWidth }: CircularProgressProps) => {
           className="stroke-[#4ab7c3]"
         />
       </svg>
-      <div className="absolute top-12 lg:top-16 left-0 right-0 mx-auto w-fit text-[#4ab7c3] text-2xl lg:text-4xl font-bold">
-        {Math.floor(timeLeft / 6.666)}:
-        {String(Math.floor((timeLeft % 10) * 6)).padStart(2, "0")}
-      </div>
+      {showLabel && (
+        <div className="absolute top-12 lg:top-16 left-0 right-0 mx-auto w-fit text-[#4ab7c3] text-2xl lg:text-4xl font-bold">
+          {Math.floor(timeLeft / 6.666)}:
+          {String(Math.floor((timeLeft % 10) * 6)).padStart(2, "0")}
+        </div>
+      )}
     </div>
   );
 };
@@ -108,7 +114,9 @@ export default function ProgressBar() {
   const midScreen = useMediaQuery({ minWidth: 768 });
   const largeScreen = useMediaQuery({ minWidth: 1024 });
 
-  let size = 100;
+  const showLabel = midScreen;
+
+  let size = 92;
   if (largeScreen) {
     size = 180;
   } else if (midScreen) {
@@ -117,7 +125,7 @@ export default function ProgressBar() {
 
   return (
     <div className="max-w-xs mx-auto w-full flex flex-col items-center">
-      <CircularProgress size={size} strokeWidth={20} showLabel />
+      <CircularProgress size={size} strokeWidth={20} showLabel={showLabel} />
     </div>
   );
 }
