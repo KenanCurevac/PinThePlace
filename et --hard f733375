@@ -1,0 +1,21 @@
+[33meea63f0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m first fixes for responsiveness on mobile
+[33mf733375[m game page small screen responsiveness
+[33m35ce99c[m home and md size for game page
+[33m3ba751d[m font and skipped question on review bug
+[33m2e28d06[m further image fixes
+[33m12ffe81[m Image added for deployment
+[33mcc7a946[m play again functionality
+[33m99bc3fe[m small stuff
+[33m4dfd3f0[m review scroll and questions
+[33mf555f94[m tooltip and some adjustments
+[33m086259b[m finished review and some design changes
+[33m1fba36c[m first review approaches
+[33me3668db[m results map added
+[33m8a2de84[m initial results page setup
+[33mf63d85d[m timer added
+[33ma9a8ae7[m answer marker
+[33m5112acc[m marker setting on each new question
+[33mb946e14[m map logic to disable after first click and next question button added
+[33m95b2f3d[m some zustand beginnings
+[33m0701be2[m game page arrangement
+[33m9c7f91c[m Initial commit from Create Next App
