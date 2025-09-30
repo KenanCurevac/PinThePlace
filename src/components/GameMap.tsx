@@ -154,7 +154,7 @@ export default function GameMap() {
           height: "100%",
           maxWidth: "100%",
         }}
-        className="border-[#4ab7c3] border-4 rounded-xl !cursor-crosshair"
+        className="w-full h-full max-w-full border-[#4ab7c3] border-4 rounded-xl !cursor-crosshair"
       />
     </div>
   );
