@@ -7,21 +7,21 @@ import Image from "next/image";
 export default function Results() {
   return (
     <div
-      className="h-screen grid grid-rows-[1fr_3fr] grid-cols-[auto_2fr_1fr_1fr] gap-8 p-10 cursor-default"
+      className="h-screen grid grid-rows-[1fr_4fr_0.5fr] grid-cols-[auto_2fr_1fr_1fr] gap-8 p-10 cursor-default"
       style={{
-        gridTemplateAreas: `"logo message message points" "map map review review"`,
+        gridTemplateAreas: `"logo message message points" "map map review review" "map map button button`,
       }}
     >
       <Image
         src="/logo-ptp.png"
         width={647}
         height={630}
-        className=" h-[185px] w-auto object-contain drop-shadow-[2px_2px_4px_black] ml-8"
+        className=" h-[160px] w-auto object-contain drop-shadow-[2px_2px_4px_black] ml-8"
         style={{ gridArea: "logo" }}
         alt="Pin the Place Logo"
       />
       <div
-        className="text-8xl text-[#4ab7c3] my-auto font-semibold text-center font-sans"
+        className="text-[5.5rem] leading-24 text-[#4ab7c3] my-auto font-semibold text-center font-sans"
         style={{ gridArea: "message" }}
       >
         Great job Traveler!
@@ -32,11 +32,10 @@ export default function Results() {
       <div style={{ gridArea: "map" }}>
         <ResultsMap />
       </div>
-      <div
-        style={{ gridArea: "review" }}
-        className="flex flex-col justify-between"
-      >
+      <div style={{ gridArea: "review" }} className="flex">
         <Review />
+      </div>
+      <div style={{ gridArea: "button" }}>
         <PlayButton type="Again" />
       </div>
     </div>

@@ -20,6 +20,10 @@ body {
   padding: 0;
 }
 
+@theme {
+  --breakpoint-xxl: 81.85rem;
+}
+
 .marker-tooltip.leaflet-tooltip {
   background-color: #004551;
   border-color: white;

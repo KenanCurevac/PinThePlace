@@ -24,7 +24,7 @@ export default function Review() {
   return (
     <ScrollArea
       type="always"
-      className="h-80 w-full rounded-2xl bg-[linear-gradient(165deg,#18838f,#4ab7c3)] font-sans drop-shadow-[2px_2px_4px_black] overflow-visible"
+      className="h-78 xxl:h-[calc(100vh-392px)] w-full rounded-2xl bg-[linear-gradient(165deg,#18838f,#4ab7c3)] font-sans drop-shadow-[2px_2px_4px_black] overflow-visible"
     >
       <div className="p-4">
         <h4 className="mb-4 leading-none text-center text-4xl font-semibold tracking-wide">

@@ -134,9 +134,9 @@ export const allQuestions: Question[] = [
   },
   {
     id: 22,
-    question: "Where did the Titanic sink in 1912?",
-    answer: "600 km southeast of Newfoundland",
-    coordinates: { lat: 41.7325, lng: -49.9469 },
+    question: "Where is the headquarters of the Red Cross located?",
+    answer: "Geneva",
+    coordinates: { lat: 46.2262, lng: 6.1432 },
   },
   {
     id: 23,

@@ -131,7 +131,7 @@ export default function GameMap() {
     <div className="relative w-full h-full">
       {revealAnswer && questionNumber < 9 && (
         <div
-          className="w-56 md:w-72 lg:w-1/2 h-10 md:h-12 lg:h-1/7 bg-[linear-gradient(175deg,#18838f,#4ab7c3)] hover:bg-[linear-gradient(175deg,#4ac3af,#7bd8cc)] absolute z-1000 right-0 left-0 bottom-5 lg:bottom-4 mx-auto rounded-4xl drop-shadow-[2px_2px_4px_black] p-1 text-xl md:text-2xl lg:text-3xl hover:text-[2rem] font-semibold font-sans tracking-wide flex flex-col items-center justify-center cursor-pointer"
+          className="w-56 md:w-72 lg:w-1/2 h-10 md:h-12 lg:h-1/7 bg-[linear-gradient(175deg,#18838f,#4ab7c3)] hover:bg-[linear-gradient(175deg,#4ac3af,#7bd8cc)] absolute z-1000 right-0 left-0 bottom-5 lg:bottom-4 mx-auto rounded-4xl drop-shadow-[2px_2px_4px_black] p-1 text-xl md:text-2xl lg:text-3xl hover:text-2xl md:hover:text-[1.75rem] lg:hover:text-[2.15rem] font-semibold font-sans tracking-wide flex flex-col items-center justify-center cursor-pointer"
           onClick={() => {
             setNextQuestion();
             setNewQuestionTrigger((trigger) => !trigger);
@@ -143,7 +143,7 @@ export default function GameMap() {
       {revealAnswer && questionNumber === 9 && (
         <Link
           href="/results"
-          className="w-56 md:w-72 lg:w-1/2 h-10 md:h-12 lg:h-1/7 bg-[linear-gradient(175deg,#18838f,#4ab7c3)] hover:bg-[linear-gradient(175deg,#4ac3af,#7bd8cc)] absolute z-1000 right-0 left-0 bottom-5 lg:bottom-4 mx-auto rounded-4xl drop-shadow-[2px_2px_4px_black] p-1 text-xl md:text-2xl lg:text-3xl hover:text-[2rem] font-semibold font-sans tracking-wide flex flex-col items-center justify-center cursor-pointer"
+          className="w-56 md:w-72 lg:w-1/2 h-10 md:h-12 lg:h-1/7 bg-[linear-gradient(175deg,#18838f,#4ab7c3)] hover:bg-[linear-gradient(175deg,#4ac3af,#7bd8cc)] absolute z-1000 right-0 left-0 bottom-5 lg:bottom-4 mx-auto rounded-4xl drop-shadow-[2px_2px_4px_black] p-1 text-xl md:text-2xl lg:text-3xl hover:text-2xl md:hover:text-[1.75rem] lg:hover:text-[2.15rem] font-semibold font-sans tracking-wide flex flex-col items-center justify-center cursor-pointer"
         >
           Review Game
         </Link>

@@ -32,7 +32,7 @@ export default function GamePage() {
       </div>
       <div
         style={{ gridArea: "answer" }}
-        className="bg-[linear-gradient(175deg,#18838f,#4ab7c3)] rounded-4xl drop-shadow-[2px_2px_4px_black] p-2 min-w-[120px] text-base md:text-xl lg:text-2xl font-semibold font-sans flex items-center justify-center tracking-wide text-center"
+        className="bg-[linear-gradient(175deg,#18838f,#4ab7c3)] rounded-4xl drop-shadow-[2px_2px_4px_black] p-2 min-w-[110px] text-base md:text-xl lg:text-2xl font-semibold font-sans flex items-center justify-center tracking-wide text-center"
       >
         {revealAnswer && answer}
       </div>
