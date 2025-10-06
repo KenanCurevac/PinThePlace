@@ -21,6 +21,8 @@ body {
 }
 
 @theme {
+  --breakpoint-md1: 55rem;
+  --breakpoint-md2: 58.75rem;
   --breakpoint-xxl: 81.85rem;
 }
 

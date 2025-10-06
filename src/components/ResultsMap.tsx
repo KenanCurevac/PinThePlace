@@ -3,13 +3,16 @@
 import { useEffect, useRef, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { useGameStore } from "@/store/useGameStore";
-import { Map, Marker } from "leaflet";
+import { Map } from "leaflet";
+import { useMediaQuery } from "react-responsive";
 
 export default function ResultsMap() {
   const [enableMap, setEnableMap] = useState(false);
   const mapRef = useRef<Map | null>(null);
   const review = useGameStore((state) => state.review);
   const setScrollTo = useGameStore((state) => state.setScrollTo);
+
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   useEffect(() => {
     let map: import("leaflet").Map;
@@ -18,7 +21,7 @@ export default function ResultsMap() {
       const L = await import("leaflet");
 
       const key = "wjzrcvMblbDm0EMT5nG8";
-      map = L.map("resultsMap").setView([20, 10], 2);
+      map = L.map("resultsMap").setView([20, 10], isMobile ? 1 : 2);
 
       L.tileLayer(
         `https://api.maptiler.com/tiles/satellite-mediumres/{z}/{x}/{y}.png?key=${key}`,
@@ -33,6 +36,10 @@ export default function ResultsMap() {
         }
       ).addTo(map);
 
+      if (isMobile) {
+        map.dragging.disable();
+      }
+
       mapRef.current = map;
       setEnableMap((trigger) => !trigger);
     })();
@@ -43,7 +50,7 @@ export default function ResultsMap() {
         mapRef.current = null;
       }
     };
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -76,7 +83,6 @@ export default function ResultsMap() {
         });
 
         marker.on("click", () => {
-          console.log("Marker clicked");
           setScrollTo(question.questionNumber);
         });
       }
