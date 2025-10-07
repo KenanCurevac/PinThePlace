@@ -50,13 +50,13 @@ export default function Review() {
               <div className="text-center">{question.answer}</div>
               <div className="w-full h-[0.75px] bg-white"></div>
               <div className="flex justify-around">
-                <span className="w-[50%] text-center">
+                <div className="w-[48%] text-center">
                   Points: {question.points}
-                </span>
-                <span className="w-[50%] text-center">
+                </div>
+                <div className="w-[48%] text-center">
                   Distance: {question.distance}{" "}
                   {question.distance === "Skipped" ? "" : "km"}
-                </span>
+                </div>
               </div>
             </div>
           );
