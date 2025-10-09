@@ -41,7 +41,7 @@ export default function ResultsMap() {
       }
 
       mapRef.current = map;
-      setEnableMap((trigger) => !trigger);
+      setEnableMap(true);
     })();
 
     return () => {

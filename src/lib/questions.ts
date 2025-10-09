@@ -58,7 +58,7 @@ export const allQuestions: Question[] = [
   {
     id: 10,
     question: "What is the tallest pyramid in the world?",
-    answer: "The Great Pyramid of Giza",
+    answer: "Pyramid of Giza",
     coordinates: { lat: 29.9792, lng: 31.1342 },
   },
   {
@@ -84,13 +84,13 @@ export const allQuestions: Question[] = [
   {
     id: 14,
     question: "Where was the final of the 2022 FIFA World Cup held?",
-    answer: "Lusail Stadium, Lusail",
+    answer: "Lusail",
     coordinates: { lat: 25.416, lng: 51.4886 },
   },
   {
     id: 15,
     question: "Where were the 2020 Summer Olympics held?",
-    answer: "Tokyo, Japan",
+    answer: "Tokyo",
     coordinates: { lat: 35.6762, lng: 139.6503 },
   },
   {
@@ -103,13 +103,13 @@ export const allQuestions: Question[] = [
     id: 17,
     question:
       "In which city are the famous 'Rocky Steps' featured in the movie Rocky located?",
-    answer: "Philadelphia, USA",
+    answer: "Philadelphia",
     coordinates: { lat: 39.9656, lng: -75.1809 },
   },
   {
     id: 18,
     question:
-      "Which small island was once a federal prison famous for housing notorious criminals like Al Capone?",
+      "Which island prison once held infamous criminals such as Al Capone?",
     answer: "Alcatraz Island",
     coordinates: { lat: 37.8267, lng: -122.423 },
   },
@@ -122,7 +122,7 @@ export const allQuestions: Question[] = [
   {
     id: 20,
     question: "Where is the Mona Lisa displayed?",
-    answer: "Louvre Museum, Paris",
+    answer: "Louvre, Paris",
     coordinates: { lat: 48.8606, lng: 2.3376 },
   },
   {
@@ -159,26 +159,26 @@ export const allQuestions: Question[] = [
   {
     id: 26,
     question: "Where did the world's worst nuclear disaster occur in 1986?",
-    answer: "Chernobyl Nuclear Power Plant",
+    answer: "Chernobyl",
     coordinates: { lat: 51.389, lng: 30.0994 },
   },
   {
     id: 27,
     question:
-      "Where is the impact site of the asteroid believed to have caused the extinction of the dinosaurs?",
-    answer: "Chicxulub crater, Yucatán",
+      "Where did the asteroid strike that led to the dinosaurs' extinction?",
+    answer: "Chicxulub, Yucatan",
     coordinates: { lat: 21.4, lng: -89.5 },
   },
   {
     id: 28,
     question: "Where is the only Grand Slam tennis tournament played on grass?",
-    answer: "Wimbledon, London",
+    answer: "Wimbledon",
     coordinates: { lat: 51.4343, lng: -0.214 },
   },
   {
     id: 29,
     question:
-      "In which city did Muhammad Ali fight George Foreman in the legendary 'Rumble in the Jungle' in 1974?",
+      "Where did Muhammad Ali fight George Foreman in the 1974 'Rumble in the Jungle'?",
     answer: "Kinshasa",
     coordinates: { lat: -4.4419, lng: 15.2663 },
   },
@@ -192,8 +192,8 @@ export const allQuestions: Question[] = [
   {
     id: 31,
     question:
-      "After which battle did German forces begin a major retreat on the Eastern Front during World War II?",
-    answer: "Battle of Stalingrad",
+      "After which battle did Germany begin retreating on the Eastern Front during World War II?",
+    answer: "Stalingrad",
     coordinates: { lat: 48.708, lng: 44.5133 },
   },
   {
@@ -206,16 +206,15 @@ export const allQuestions: Question[] = [
   {
     id: 33,
     question:
-      "Which ancient city was buried under volcanic ash after the eruption of Mount Vesuvius in 79 AD?",
+      "Which city was buried under ash after Mount Vesuvius erupted in 79 AD?",
     answer: "Pompeii",
     coordinates: { lat: 40.7497, lng: 14.4869 },
   },
   {
     id: 34,
-    question:
-      "On which island did Christopher Columbus first set foot during his 1492 voyage?",
-    answer: "San Salvador Island",
-    coordinates: { lat: 24.0583, lng: -74.535 },
+    question: "Which capital city is the highest in the world by altitude?",
+    answer: "La Paz",
+    coordinates: { lat: -16.5, lng: -68.15 },
   },
   {
     id: 35,
@@ -240,9 +239,9 @@ export const allQuestions: Question[] = [
   {
     id: 38,
     question:
-      "Which city did the Ottomans capture in 1453, marking the fall of the Byzantine Empire?",
-    answer: "Constantinople (Istanbul)",
-    coordinates: { lat: 41.0082, lng: 28.9784 },
+      "Which city was a British colony until 1997 and is now a Special Administrative Region",
+    answer: "Hong Kong",
+    coordinates: { lat: 22.3193, lng: 114.1694 },
   },
   {
     id: 39,
@@ -294,14 +293,14 @@ export const allQuestions: Question[] = [
   {
     id: 46,
     question:
-      "At which place was the treaty officially ending World War I signed in 1919?",
-    answer: "Palace of Versailles",
+      "Where was the treaty officially ending World War I signed in 1919?",
+    answer: "Versailles",
     coordinates: { lat: 48.8049, lng: 2.1204 },
   },
   {
     id: 47,
     question:
-      "At which place did the Japanese attack in 1941 that prompted the United States to enter World War II?",
+      "Where did Japan attack in 1941, prompting the United States to join World War II?",
     answer: "Pearl Harbor",
     coordinates: { lat: 21.3649, lng: -157.95 },
   },
