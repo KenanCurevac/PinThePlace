@@ -43,17 +43,18 @@ export default function Review() {
                 questionRef.current[i] = el;
               }}
             >
-              <div>
+              <div className="text-center">
                 {question.questionNumber + 1}. {question.question}
               </div>
               <div className="w-full h-[0.75px] bg-white"></div>
               <div className="text-center">{question.answer}</div>
               <div className="w-full h-[0.75px] bg-white"></div>
-              <div className="flex justify-around">
-                <div className="w-[48%] text-center">
+              <div className="flex flex-col xs:flex-row md:flex-col lg:flex-row gap-2 items-center xs:items-start md:items-center lg:items-start">
+                <div className="w-full xs:w-[48%] text-center">
                   Points: {question.points}
                 </div>
-                <div className="w-[48%] text-center">
+                <div className="w-full h-[0.75px] bg-white xs:hidden md:block lg:hidden"></div>
+                <div className="w-full xs:w-[48%] md:w-full lg:w-[48%] text-center">
                   Distance: {question.distance}{" "}
                   {question.distance === "Skipped" ? "" : "km"}
                 </div>
