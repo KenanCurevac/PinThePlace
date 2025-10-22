@@ -1,14 +1,12 @@
-"use client";
-
-import PlayButton from "@/components/PlayButton";
-import ResultsMap from "@/components/ResultsMap";
-import Review from "@/components/Review";
-import TotalPointsCard from "@/components/TotalPointsCard";
+import PlayButton from "@/components/ui/PlayButton";
+import ResultsMap from "@/components/results/ResultsMap";
+import Review from "@/components/results/Review";
+import TotalPointsCard from "@/components/results/TotalPointsCard";
 import Image from "next/image";
 
 export default function Results() {
   return (
-    <div className="results-grid md:h-screen grid grid-rows-[1fr_auto_auto_260px_auto] md:grid-rows-[1fr_4fr_0.5fr] grid-cols-[1fr_1fr] md:grid-cols-[auto_2fr_1fr_1fr] gap-8 md:gap-8 p-10 cursor-default">
+    <div className="results-grid md:h-screen grid [grid-template-areas:'logo_points'_'message_message'_'button_button'_'map_map'_'review_review'] md:[grid-template-areas:'logo_message_message_points'_'map_map_review_review'_'map_map_button_button'] grid-rows-[1fr_auto_auto_260px_auto] md:grid-rows-[1fr_4fr_0.5fr] grid-cols-[1fr_1fr] md:grid-cols-[auto_2fr_1fr_1fr] gap-8 md:gap-8 p-10 cursor-default">
       <Image
         src="/logo-ptp.png"
         width={647}
@@ -35,29 +33,6 @@ export default function Results() {
       <div style={{ gridArea: "button" }}>
         <PlayButton type="Again" />
       </div>
-
-      <style jsx>
-        {`
-          .results-grid {
-            display: grid;
-            grid-template-areas:
-              "logo points"
-              "message message"
-              "button button"
-              "map map"
-              "review review";
-          }
-
-          @media (min-width: 768px) {
-            .results-grid {
-              grid-template-areas:
-                "logo message message points"
-                "map map review review"
-                "map map button button";
-            }
-          }
-        `}
-      </style>
     </div>
   );
 }

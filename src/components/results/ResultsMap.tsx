@@ -36,10 +36,6 @@ export default function ResultsMap() {
         }
       ).addTo(map);
 
-      if (isMobile) {
-        map.dragging.disable();
-      }
-
       mapRef.current = map;
       setEnableMap(true);
     })();
@@ -50,6 +46,16 @@ export default function ResultsMap() {
         mapRef.current = null;
       }
     };
+  }, []);
+
+  useEffect(() => {
+    if (!mapRef.current) return;
+
+    if (isMobile) {
+      mapRef.current.dragging.disable();
+    } else {
+      mapRef.current.dragging.enable();
+    }
   }, [isMobile]);
 
   useEffect(() => {

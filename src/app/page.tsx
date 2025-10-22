@@ -1,4 +1,4 @@
-import PlayButton from "@/components/PlayButton";
+import PlayButton from "@/components/ui/PlayButton";
 import Image from "next/image";
 import { Pinyon_Script } from "next/font/google";
 
