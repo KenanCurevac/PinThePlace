@@ -1,6 +1,6 @@
 import Answer from "@/components/game/Answer";
+import ClientGameMap from "@/components/game/ClientGameMap";
 import Distance from "@/components/game/Distance";
-import GameMap from "@/components/game/GameMap";
 import Points from "@/components/game/Points";
 import ProgressBar from "@/components/game/ProgressBar";
 import Question from "@/components/game/Question";
@@ -9,25 +9,25 @@ import TotalPoints from "@/components/game/TotalPoints";
 export default function GamePage() {
   return (
     <div className="game-grid h-[100dvh] overflow-y-hidden grid [grid-template-areas:'question_question_question_timer'_'totalPoints_answer_points_distance'_'map_map_map_map'] md:[grid-template-areas:'question_question_timer'_'totalPoints_answer_timer'_'map_map_points'_'map_map_distance'] grid-rows-[1fr_1fr_8fr] md:grid-rows-[1fr_1fr_4fr_4fr] grid-cols-[1fr_1fr_1fr_1fr] md:grid-cols-[1fr_4fr_0.5fr] lg:grid-cols-[1fr_4fr_1fr] gap-2 md:gap-3 lg:gap-4 p-2.5 md:p-6 lg:p-8 cursor-default">
-      <div style={{ gridArea: "question" }}>
+      <div className="[grid-area:question] self-center">
         <Question />
       </div>
-      <div style={{ gridArea: "timer" }}>
+      <div className="[grid-area:timer]">
         <ProgressBar />
       </div>
-      <div style={{ gridArea: "totalPoints" }}>
+      <div className="[grid-area:totalPoints]">
         <TotalPoints />
       </div>
-      <div style={{ gridArea: "answer" }}>
-        <Answer />{" "}
+      <div className="[grid-area:answer]">
+        <Answer />
       </div>
-      <div style={{ gridArea: "map" }} className="flex-1 h-full">
-        <GameMap />
+      <div className="[grid-area:map] h-full">
+        <ClientGameMap />
       </div>
-      <div style={{ gridArea: "points" }}>
+      <div className="[grid-area:points]">
         <Points />
       </div>
-      <div style={{ gridArea: "distance" }}>
+      <div className="[grid-area:distance]">
         <Distance />
       </div>
     </div>

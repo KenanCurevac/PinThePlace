@@ -25,12 +25,11 @@ export default function GameMap() {
   useEffect(() => {
     let map: import("leaflet").Map;
 
-    (async () => {
+    async function initMap() {
       const L = await import("leaflet");
-
       const key = "wjzrcvMblbDm0EMT5nG8";
-      map = L.map("map").setView([20, 10], 2);
 
+      map = L.map("map").setView([20, 10], 2);
       L.tileLayer(
         `https://api.maptiler.com/tiles/satellite-mediumres/{z}/{x}/{y}.png?key=${key}`,
         {
@@ -46,7 +45,9 @@ export default function GameMap() {
 
       mapRef.current = map;
       setMapEnabled(true);
-    })();
+    }
+
+    initMap();
 
     return () => {
       if (mapRef.current) {
@@ -63,7 +64,7 @@ export default function GameMap() {
 
     const map = mapRef.current;
 
-    (async () => {
+    async function guessMarker() {
       const L = await import("leaflet");
 
       const redIcon = L.icon({
@@ -86,7 +87,9 @@ export default function GameMap() {
 
       map.setView([20, 10], 2);
       map.on("click", handleClick);
-    })();
+    }
+
+    guessMarker();
 
     return () => {
       if (markerGuessRef.current) {
@@ -108,7 +111,7 @@ export default function GameMap() {
 
     const map = mapRef.current;
 
-    (async () => {
+    async function answerMarker() {
       const L = await import("leaflet");
 
       const greenIcon = L.icon({
@@ -124,7 +127,9 @@ export default function GameMap() {
         }).addTo(map);
         markerAnswerRef.current = markerAnswer;
       }
-    })();
+    }
+
+    answerMarker();
 
     return () => {
       if (markerAnswerRef.current) {

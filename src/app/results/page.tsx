@@ -1,8 +1,8 @@
 import PlayButton from "@/components/ui/PlayButton";
-import ResultsMap from "@/components/results/ResultsMap";
 import Review from "@/components/results/Review";
 import TotalPointsCard from "@/components/results/TotalPointsCard";
 import Image from "next/image";
+import ClientResultsMap from "@/components/results/ClientResultsMap";
 
 export default function Results() {
   return (
@@ -11,26 +11,22 @@ export default function Results() {
         src="/logo-ptp.png"
         width={647}
         height={630}
-        className=" h-[160px] justify-self-center self-center md:w-auto object-contain drop-shadow-[2px_2px_4px_black] md:ml-8"
-        style={{ gridArea: "logo" }}
+        className="[grid-area:logo] h-[160px] justify-self-center self-center md:w-auto object-contain drop-shadow-[2px_2px_4px_black] md:ml-8"
         alt="Pin the Place Logo"
       />
-      <div
-        className="text-7xl md:text-[3.25rem] md1:text-[4.375rem] md2:text-[5.25rem] leading-24 md:leading-15 md1:leading-22 md2:leading-25 text-[#4ab7c3] my-auto font-semibold text-center font-sans"
-        style={{ gridArea: "message" }}
-      >
+      <div className="[grid-area:message] text-7xl md:text-[3.25rem] md1:text-[4.375rem] md2:text-[5.25rem] leading-24 md:leading-15 md1:leading-22 md2:leading-25 text-[#4ab7c3] my-auto font-semibold text-center font-sans">
         Great job Traveler!
       </div>
-      <div style={{ gridArea: "points" }}>
+      <div className="[grid-area:points]">
         <TotalPointsCard />
       </div>
-      <div style={{ gridArea: "map" }}>
-        <ResultsMap />
+      <div className="[grid-area:map]">
+        <ClientResultsMap />
       </div>
-      <div style={{ gridArea: "review" }}>
+      <div className="[grid-area:review]">
         <Review />
       </div>
-      <div style={{ gridArea: "button" }}>
+      <div className="[grid-area:button]">
         <PlayButton type="Again" />
       </div>
     </div>

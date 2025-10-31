@@ -17,12 +17,11 @@ export default function ResultsMap() {
   useEffect(() => {
     let map: import("leaflet").Map;
 
-    (async () => {
+    async function initMap() {
       const L = await import("leaflet");
-
       const key = "wjzrcvMblbDm0EMT5nG8";
-      map = L.map("resultsMap").setView([20, 10], isMobile ? 1 : 2);
 
+      map = L.map("resultsMap").setView([20, 10], isMobile ? 1 : 2);
       L.tileLayer(
         `https://api.maptiler.com/tiles/satellite-mediumres/{z}/{x}/{y}.png?key=${key}`,
         {
@@ -38,7 +37,9 @@ export default function ResultsMap() {
 
       mapRef.current = map;
       setEnableMap(true);
-    })();
+    }
+
+    initMap();
 
     return () => {
       if (mapRef.current) {
@@ -63,7 +64,7 @@ export default function ResultsMap() {
 
     const map = mapRef.current;
 
-    (async () => {
+    async function answerMarkers() {
       const L = await import("leaflet");
 
       const greenIcon = L.icon({
@@ -92,7 +93,9 @@ export default function ResultsMap() {
           setScrollTo(question.questionNumber);
         });
       }
-    })();
+    }
+
+    answerMarkers();
 
     return () => {};
   }, [enableMap]);
