@@ -26,7 +26,7 @@ export default function Home() {
         alt="Pin the Place Logo"
         className="w-44 md:w-52 lg:w-60 py-10"
       />
-      <PlayButton type="First" />
+      <PlayButton type="start" />
       <h1
         className={`text-7xl lg:text-8xl text-white mb-20 ${pinyon.className}`}
       >

@@ -4,11 +4,11 @@ import { useGameStore } from "@/store/useGameStore";
 import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
-interface CircularProgressProps {
+type CircularProgressProps = {
   size: number;
-  strokeWidth?: number;
-  showLabel?: boolean;
-}
+  strokeWidth: number;
+  showLabel: boolean;
+};
 
 const CircularProgress = ({
   size,
@@ -56,7 +56,7 @@ const CircularProgress = ({
 
   useEffect(() => {
     if (timeLeft <= 0 && !revealAnswer) {
-      setRevealAnswer("Skipped");
+      setRevealAnswer("skipped");
     }
   }, [timeLeft]);
 

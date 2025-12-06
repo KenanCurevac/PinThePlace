@@ -18,7 +18,7 @@ export const metadata = {
 
 export default function Results() {
   return (
-    <main className="results-grid md:h-screen grid [grid-template-areas:'logo_points'_'message_message'_'button_button'_'map_map'_'review_review'] md:[grid-template-areas:'logo_message_message_points'_'map_map_review_review'_'map_map_button_button'] grid-rows-[1fr_auto_auto_260px_auto] md:grid-rows-[1fr_4fr_0.5fr] grid-cols-[1fr_1fr] md:grid-cols-[auto_2fr_1fr_1fr] gap-8 md:gap-8 p-10 cursor-default">
+    <main className="md:h-screen grid [grid-template-areas:'logo_points'_'message_message'_'button_button'_'map_map'_'review_review'] md:[grid-template-areas:'logo_message_message_points'_'map_map_review_review'_'map_map_button_button'] grid-rows-[1fr_auto_auto_260px_auto] md:grid-rows-[1fr_4fr_0.5fr] grid-cols-[1fr_1fr] md:grid-cols-[auto_2fr_1fr_1fr] gap-8 md:gap-8 p-10 cursor-default">
       <Image
         src="/logo-ptp.png"
         width={647}
@@ -43,7 +43,7 @@ export default function Results() {
         <Review />
       </section>
       <section className="[grid-area:button]">
-        <PlayButton type="Again" />
+        <PlayButton type="again" />
       </section>
     </main>
   );

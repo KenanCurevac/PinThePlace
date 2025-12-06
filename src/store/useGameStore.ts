@@ -126,7 +126,7 @@ export const useGameStore = create<useGameStoreProps>((set) => {
                 lng: state.coordinates.lng,
               },
               points: state.points,
-              distance: response === "Skipped" ? "Skipped" : state.distance,
+              distance: response === "skipped" ? "Skipped" : state.distance,
             },
           ],
         };

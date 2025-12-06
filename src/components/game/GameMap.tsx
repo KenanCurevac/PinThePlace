@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { useGameStore } from "@/store/useGameStore";
-import { Map, Marker } from "leaflet";
+import L from "leaflet";
 import Link from "next/link";
 
 export default function GameMap() {
@@ -16,38 +16,32 @@ export default function GameMap() {
   const setRevealAnswer = useGameStore((state) => state.setRevealAnswer);
   const questionNumber = useGameStore((state) => state.questionNumber);
 
-  const mapRef = useRef<Map | null>(null);
-  const markerGuessRef = useRef<Marker | null>(null);
-  const markerAnswerRef = useRef<Marker | null>(null);
+  const mapRef = useRef<L.Map | null>(null);
+  const markerGuessRef = useRef<L.Marker | null>(null);
+  const markerAnswerRef = useRef<L.Marker | null>(null);
+
   const [newQuestionTrigger, setNewQuestionTrigger] = useState(false);
   const [mapEnabled, setMapEnabled] = useState(false);
 
   useEffect(() => {
-    let map: import("leaflet").Map;
+    const key = "wjzrcvMblbDm0EMT5nG8";
 
-    async function initMap() {
-      const L = await import("leaflet");
-      const key = "wjzrcvMblbDm0EMT5nG8";
+    const map = L.map("map").setView([20, 10], 2);
+    L.tileLayer(
+      `https://api.maptiler.com/tiles/satellite-mediumres/{z}/{x}/{y}.png?key=${key}`,
+      {
+        tileSize: 512,
+        zoomOffset: -1,
+        minZoom: 1,
+        maxZoom: 13,
+        attribution:
+          '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+        crossOrigin: true,
+      }
+    ).addTo(map);
 
-      map = L.map("map").setView([20, 10], 2);
-      L.tileLayer(
-        `https://api.maptiler.com/tiles/satellite-mediumres/{z}/{x}/{y}.png?key=${key}`,
-        {
-          tileSize: 512,
-          zoomOffset: -1,
-          minZoom: 1,
-          maxZoom: 13,
-          attribution:
-            '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
-          crossOrigin: true,
-        }
-      ).addTo(map);
-
-      mapRef.current = map;
-      setMapEnabled(true);
-    }
-
-    initMap();
+    mapRef.current = map;
+    setMapEnabled(true);
 
     return () => {
       if (mapRef.current) {
@@ -64,32 +58,27 @@ export default function GameMap() {
 
     const map = mapRef.current;
 
-    async function guessMarker() {
-      const L = await import("leaflet");
+    const redIcon = L.icon({
+      iconUrl: "/red-pin.png",
+      iconSize: [30, 40],
+      iconAnchor: [15, 40],
+      popupAnchor: [0, -40],
+    });
 
-      const redIcon = L.icon({
-        iconUrl: "/red-pin.png",
-        iconSize: [30, 40],
-        iconAnchor: [15, 40],
-        popupAnchor: [0, -40],
-      });
-      function handleClick(e: L.LeafletMouseEvent) {
-        const { lat, lng } = e.latlng;
+    function handleClick(e: L.LeafletMouseEvent) {
+      const { lat, lng } = e.latlng;
 
-        const markerGuess = L.marker([lat, lng], { icon: redIcon }).addTo(map);
-        markerGuessRef.current = markerGuess;
+      const markerGuess = L.marker([lat, lng], { icon: redIcon }).addTo(map);
+      markerGuessRef.current = markerGuess;
 
-        setPoints(lat, lng);
-        setTimerStops();
-        setRevealAnswer("Answered");
-        map.off("click");
-      }
-
-      map.setView([20, 10], 2);
-      map.on("click", handleClick);
+      setPoints(lat, lng);
+      setTimerStops();
+      setRevealAnswer("answered");
+      map.off("click");
     }
 
-    guessMarker();
+    map.setView([20, 10], 2);
+    map.on("click", handleClick);
 
     return () => {
       if (markerGuessRef.current) {
@@ -111,25 +100,19 @@ export default function GameMap() {
 
     const map = mapRef.current;
 
-    async function answerMarker() {
-      const L = await import("leaflet");
+    const greenIcon = L.icon({
+      iconUrl: "/green-pin.png",
+      iconSize: [30, 40],
+      iconAnchor: [15, 40],
+      popupAnchor: [0, -40],
+    });
 
-      const greenIcon = L.icon({
-        iconUrl: "/green-pin.png",
-        iconSize: [30, 40],
-        iconAnchor: [15, 40],
-        popupAnchor: [0, -40],
-      });
-
-      if (revealAnswer) {
-        const markerAnswer = L.marker([latAnswer, lngAnswer], {
-          icon: greenIcon,
-        }).addTo(map);
-        markerAnswerRef.current = markerAnswer;
-      }
+    if (revealAnswer) {
+      const markerAnswer = L.marker([latAnswer, lngAnswer], {
+        icon: greenIcon,
+      }).addTo(map);
+      markerAnswerRef.current = markerAnswer;
     }
-
-    answerMarker();
 
     return () => {
       if (markerAnswerRef.current) {
