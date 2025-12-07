@@ -25,6 +25,7 @@ export default function Home() {
         height={630}
         alt="Pin the Place Logo"
         className="w-44 md:w-52 lg:w-60 py-10"
+        priority
       />
       <PlayButton type="start" />
       <h1

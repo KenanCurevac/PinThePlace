@@ -19,9 +19,7 @@ export default function GameMap() {
   const mapRef = useRef<L.Map | null>(null);
   const markerGuessRef = useRef<L.Marker | null>(null);
   const markerAnswerRef = useRef<L.Marker | null>(null);
-
   const [newQuestionTrigger, setNewQuestionTrigger] = useState(false);
-  const [mapEnabled, setMapEnabled] = useState(false);
 
   useEffect(() => {
     const key = "wjzrcvMblbDm0EMT5nG8";
@@ -41,7 +39,6 @@ export default function GameMap() {
     ).addTo(map);
 
     mapRef.current = map;
-    setMapEnabled(true);
 
     return () => {
       if (mapRef.current) {
@@ -57,6 +54,7 @@ export default function GameMap() {
     }
 
     const map = mapRef.current;
+    map.setView([20, 10], 2);
 
     const redIcon = L.icon({
       iconUrl: "/red-pin.png",
@@ -74,10 +72,8 @@ export default function GameMap() {
       setPoints(lat, lng);
       setTimerStops();
       setRevealAnswer("answered");
-      map.off("click");
     }
 
-    map.setView([20, 10], 2);
     map.on("click", handleClick);
 
     return () => {
@@ -86,19 +82,13 @@ export default function GameMap() {
         markerGuessRef.current = null;
       }
     };
-  }, [mapEnabled, newQuestionTrigger]);
+  }, [newQuestionTrigger]);
 
   useEffect(() => {
     if (!mapRef.current || !revealAnswer) return;
 
     const map = mapRef.current;
     map.off("click");
-  }, [revealAnswer]);
-
-  useEffect(() => {
-    if (!mapRef.current || !revealAnswer) return;
-
-    const map = mapRef.current;
 
     const greenIcon = L.icon({
       iconUrl: "/green-pin.png",
@@ -120,7 +110,7 @@ export default function GameMap() {
         markerAnswerRef.current = null;
       }
     };
-  }, [mapEnabled, revealAnswer]);
+  }, [revealAnswer]);
 
   return (
     <div className="relative w-full h-full">
