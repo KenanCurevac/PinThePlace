@@ -55,8 +55,8 @@ export default function Review() {
                 </div>
                 <hr className="w-full h-[0.75px] bg-white xs:hidden md:block lg:hidden"></hr>
                 <div className="w-full xs:w-[48%] md:w-full lg:w-[48%] text-center">
-                  Distance: {question.distance}{" "}
-                  {question.distance === "Skipped" ? "" : "km"}
+                  Distance: {question.distance}
+                  {question.distance ? " km" : "Skipped"}
                 </div>
               </div>
             </li>

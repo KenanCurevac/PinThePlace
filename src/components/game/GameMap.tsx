@@ -71,7 +71,7 @@ export default function GameMap() {
 
       setPoints(lat, lng);
       setTimerStops();
-      setRevealAnswer("answered");
+      setRevealAnswer();
     }
 
     map.on("click", handleClick);
@@ -97,12 +97,10 @@ export default function GameMap() {
       popupAnchor: [0, -40],
     });
 
-    if (revealAnswer) {
-      const markerAnswer = L.marker([latAnswer, lngAnswer], {
-        icon: greenIcon,
-      }).addTo(map);
-      markerAnswerRef.current = markerAnswer;
-    }
+    const markerAnswer = L.marker([latAnswer, lngAnswer], {
+      icon: greenIcon,
+    }).addTo(map);
+    markerAnswerRef.current = markerAnswer;
 
     return () => {
       if (markerAnswerRef.current) {

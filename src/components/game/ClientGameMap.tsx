@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 const GameMap = dynamic(() => import("@/components/game/GameMap"), {
   ssr: false,
   loading: () => (
-    <div className="flex items-center justify-center h-full text-lg text-gray-400">
+    <div className="flex items-center justify-center h-full text-2xl text-gray-400">
       Loading map...
     </div>
   ),

@@ -9,7 +9,7 @@ type ReviewType = {
   answer: string;
   coordinates: { lat: number; lng: number };
   points: number;
-  distance: number | string;
+  distance: number | null;
 };
 
 export type useGameStoreProps = {
@@ -20,7 +20,7 @@ export type useGameStoreProps = {
   coordinates: { lat: number; lng: number };
   points: number;
   totalPoints: number;
-  distance: number | string;
+  distance: number | null;
   timerStops: boolean;
   revealAnswer: boolean;
   review: ReviewType[];
@@ -28,7 +28,7 @@ export type useGameStoreProps = {
   setNextQuestion: () => void;
   setPoints: (lat: number, lng: number) => void;
   setTimerStops: () => void;
-  setRevealAnswer: (response: string) => void;
+  setRevealAnswer: () => void;
   setScrollTo: (questionNum: number) => void;
   setNewQuestions: () => void;
 };
@@ -47,7 +47,7 @@ export const useGameStore = create<useGameStoreProps>((set) => {
     },
     points: 0,
     totalPoints: 0,
-    distance: 0,
+    distance: null,
     timerStops: false,
     revealAnswer: false,
     scrollTo: null,
@@ -66,7 +66,7 @@ export const useGameStore = create<useGameStoreProps>((set) => {
             lng: state.selectedQuestions[nextIndex].coordinates.lng,
           },
           points: 0,
-          distance: 0,
+          distance: null,
           timerStops: false,
           revealAnswer: false,
         };
@@ -111,7 +111,7 @@ export const useGameStore = create<useGameStoreProps>((set) => {
       }));
     },
 
-    setRevealAnswer: (response: string) => {
+    setRevealAnswer: () => {
       set((state: useGameStoreProps) => {
         return {
           revealAnswer: true,
@@ -126,7 +126,7 @@ export const useGameStore = create<useGameStoreProps>((set) => {
                 lng: state.coordinates.lng,
               },
               points: state.points,
-              distance: response === "skipped" ? "Skipped" : state.distance,
+              distance: state.distance,
             },
           ],
         };
@@ -152,7 +152,7 @@ export const useGameStore = create<useGameStoreProps>((set) => {
           },
           points: 0,
           totalPoints: 0,
-          distance: 0,
+          distance: null,
           timerStops: false,
           revealAnswer: false,
           scrollTo: null,

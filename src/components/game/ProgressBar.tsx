@@ -15,13 +15,13 @@ const CircularProgress = ({
   strokeWidth,
   showLabel,
 }: CircularProgressProps) => {
-  const [timeLeft, setTimeLeft] = useState(100);
   const questionNumber = useGameStore((state) => state.questionNumber);
   const timerStops = useGameStore((state) => state.timerStops);
   const setRevealAnswer = useGameStore((state) => state.setRevealAnswer);
   const revealAnswer = useGameStore((state) => state.revealAnswer);
 
   const timerRef = useRef<number | null>(null);
+  const [timeLeft, setTimeLeft] = useState(100);
 
   const radius = size / 2 - 10;
   const circumference = Math.ceil(3.14 * radius * 2);
@@ -55,17 +55,17 @@ const CircularProgress = ({
   }, [questionNumber]);
 
   useEffect(() => {
-    if (timeLeft <= 0 && !revealAnswer) {
-      setRevealAnswer("skipped");
-    }
-  }, [timeLeft]);
-
-  useEffect(() => {
     if (timerStops && timerRef.current !== null) {
       clearInterval(timerRef.current);
       timerRef.current = null;
     }
   }, [timerStops]);
+
+  useEffect(() => {
+    if (timeLeft <= 0 && !revealAnswer) {
+      setRevealAnswer();
+    }
+  }, [timeLeft]);
 
   return (
     <div className="relative">
