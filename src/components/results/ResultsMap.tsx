@@ -7,9 +7,10 @@ import L from "leaflet";
 import { useMediaQuery } from "react-responsive";
 
 export default function ResultsMap() {
-  const mapRef = useRef<L.Map | null>(null);
   const review = useGameStore((state) => state.review);
   const setScrollTo = useGameStore((state) => state.setScrollTo);
+
+  const mapRef = useRef<L.Map | null>(null);
 
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
@@ -62,13 +63,17 @@ export default function ResultsMap() {
       popupAnchor: [0, -40],
     });
 
+    const markers: L.Marker[] = [];
+
     for (const question of review) {
-      const marker = L.marker(
+      const marker: L.Marker = L.marker(
         [question.coordinates.lat, question.coordinates.lng],
         {
           icon: greenIcon,
         }
       ).addTo(map);
+
+      markers.push(marker);
 
       marker.bindTooltip(`${question.answer}`, {
         permanent: false,
@@ -82,7 +87,12 @@ export default function ResultsMap() {
       });
     }
 
-    return () => {};
+    return () => {
+      markers.forEach((marker) => {
+        marker.off();
+        marker.remove();
+      });
+    };
   }, []);
 
   return (

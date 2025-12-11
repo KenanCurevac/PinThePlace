@@ -24,7 +24,7 @@ export type useGameStoreProps = {
   timerStops: boolean;
   revealAnswer: boolean;
   review: ReviewType[];
-  scrollTo: null | number;
+  scrollToNum: null | number;
   setNextQuestion: () => void;
   setPoints: (lat: number, lng: number) => void;
   setTimerStops: () => void;
@@ -50,7 +50,7 @@ export const useGameStore = create<useGameStoreProps>((set) => {
     distance: null,
     timerStops: false,
     revealAnswer: false,
-    scrollTo: null,
+    scrollToNum: null,
     review: [],
 
     setNextQuestion: () =>
@@ -134,7 +134,7 @@ export const useGameStore = create<useGameStoreProps>((set) => {
     },
 
     setScrollTo: (questionNum) => {
-      set((state) => ({ scrollTo: questionNum }));
+      set((state) => ({ scrollToNum: questionNum }));
     },
 
     setNewQuestions: () => {

@@ -77,6 +77,7 @@ export default function GameMap() {
     map.on("click", handleClick);
 
     return () => {
+      map.off("click");
       if (markerGuessRef.current) {
         markerGuessRef.current.remove();
         markerGuessRef.current = null;

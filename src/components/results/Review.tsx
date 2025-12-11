@@ -7,14 +7,14 @@ import { useMediaQuery } from "react-responsive";
 
 export default function Review() {
   const review = useGameStore((state) => state.review);
-  const scrollTo = useGameStore((state) => state.scrollTo);
+  const scrollToNum = useGameStore((state) => state.scrollToNum);
 
   const questionRef = useRef<(HTMLLIElement | null)[]>([]);
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
   useEffect(() => {
     const index = review.findIndex(
-      (question) => question.questionNumber === scrollTo
+      (question) => question.questionNumber === scrollToNum
     );
 
     questionRef.current[index]?.scrollIntoView({
@@ -27,7 +27,7 @@ export default function Review() {
     <ScrollArea
       type="always"
       className={`${
-        isMobile ? "100%" : "h-78"
+        isMobile ? "h-auto" : "h-78"
       } xxl:h-[calc(100vh-392px)] w-full mt-8 md:mt-0 rounded-2xl bg-[linear-gradient(165deg,#18838f,#4ab7c3)] font-sans drop-shadow-[2px_2px_4px_black] overflow-visible p-4`}
     >
       <h3 className="mb-4 leading-none text-center text-4xl font-semibold tracking-wide">
