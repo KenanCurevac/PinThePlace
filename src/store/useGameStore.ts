@@ -15,9 +15,6 @@ type ReviewType = {
 export type useGameStoreProps = {
   selectedQuestions: Question[];
   questionNumber: number;
-  question: string;
-  answer: string;
-  coordinates: { lat: number; lng: number };
   points: number;
   totalPoints: number;
   distance: number | null;
@@ -34,17 +31,11 @@ export type useGameStoreProps = {
 };
 
 export const useGameStore = create<useGameStoreProps>((set) => {
-  const initialQuestion = getSelectedQuestions();
+  const initialQuestions = getSelectedQuestions();
 
   return {
-    selectedQuestions: initialQuestion,
+    selectedQuestions: initialQuestions,
     questionNumber: 0,
-    question: initialQuestion[0].question,
-    answer: initialQuestion[0].answer,
-    coordinates: {
-      lat: initialQuestion[0].coordinates.lat,
-      lng: initialQuestion[0].coordinates.lng,
-    },
     points: 0,
     totalPoints: 0,
     distance: null,
@@ -59,12 +50,6 @@ export const useGameStore = create<useGameStoreProps>((set) => {
 
         return {
           questionNumber: nextIndex,
-          question: state.selectedQuestions[nextIndex].question,
-          answer: state.selectedQuestions[nextIndex].answer,
-          coordinates: {
-            lat: state.selectedQuestions[nextIndex].coordinates.lat,
-            lng: state.selectedQuestions[nextIndex].coordinates.lng,
-          },
           points: 0,
           distance: null,
           timerStops: false,
@@ -72,16 +57,16 @@ export const useGameStore = create<useGameStoreProps>((set) => {
         };
       }),
 
-    setPoints: (lat: number, lng: number) =>
+    setPoints: (latGuess: number, lngGuess: number) =>
       set((state: useGameStoreProps) => {
+        const currentQuestion = state.selectedQuestions[state.questionNumber];
+        const {
+          coordinates: { lat: latAnswer, lng: lngAnswer },
+        } = currentQuestion;
+
         const distance =
           Math.round(
-            getDistance(
-              lat,
-              lng,
-              state.coordinates.lat,
-              state.coordinates.lng
-            ) * 100
+            getDistance(latGuess, lngGuess, latAnswer, lngAnswer) * 100
           ) / 100;
 
         let newPoints = 0;
@@ -119,11 +104,13 @@ export const useGameStore = create<useGameStoreProps>((set) => {
             ...state.review,
             {
               questionNumber: state.questionNumber,
-              question: state.question,
-              answer: state.answer,
+              question: state.selectedQuestions[state.questionNumber].question,
+              answer: state.selectedQuestions[state.questionNumber].answer,
               coordinates: {
-                lat: state.coordinates.lat,
-                lng: state.coordinates.lng,
+                lat: state.selectedQuestions[state.questionNumber].coordinates
+                  .lat,
+                lng: state.selectedQuestions[state.questionNumber].coordinates
+                  .lng,
               },
               points: state.points,
               distance: state.distance,
@@ -144,12 +131,6 @@ export const useGameStore = create<useGameStoreProps>((set) => {
         return {
           selectedQuestions: newQuestions,
           questionNumber: 0,
-          question: newQuestions[0].question,
-          answer: newQuestions[0].answer,
-          coordinates: {
-            lat: newQuestions[0].coordinates.lat,
-            lng: newQuestions[0].coordinates.lng,
-          },
           points: 0,
           totalPoints: 0,
           distance: null,

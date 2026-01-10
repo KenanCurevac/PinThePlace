@@ -3,7 +3,10 @@
 import { useGameStore } from "@/store/useGameStore";
 
 export default function Answer() {
-  const answer = useGameStore((state) => state.answer);
+  const currentQuestion = useGameStore(
+    (state) => state.selectedQuestions[state.questionNumber]
+  );
+  const { answer } = currentQuestion;
   const revealAnswer = useGameStore((state) => state.revealAnswer);
 
   return (

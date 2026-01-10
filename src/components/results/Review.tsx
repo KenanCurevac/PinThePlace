@@ -21,7 +21,7 @@ export default function Review() {
       behavior: "smooth",
       block: "start",
     });
-  }, [scrollTo]);
+  }, [scrollToNum]);
 
   return (
     <ScrollArea

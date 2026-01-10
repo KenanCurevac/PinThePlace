@@ -1,9 +1,7 @@
 import { allQuestions } from "./questions";
 import { Question } from "./QuestionTypes";
 
-type getSelectedQuestionProps = () => Question[];
-
-export const getSelectedQuestions: getSelectedQuestionProps = () => {
+export function getSelectedQuestions(): Question[] {
   const indexArray: number[] = [];
 
   while (indexArray.length < 10) {
@@ -17,4 +15,4 @@ export const getSelectedQuestions: getSelectedQuestionProps = () => {
   const pickedQuestions = indexArray.map((index) => allQuestions[index]);
 
   return pickedQuestions;
-};
+}

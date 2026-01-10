@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://pin-the-place-kenan.vercel.app/"),
   title: "Pin the Place",
   description:
     "Discover the world with Pin the Place — a geography quiz that challenges your global knowledge through interactive map guessing and scoring.",

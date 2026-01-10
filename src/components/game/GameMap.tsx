@@ -10,11 +10,16 @@ export default function GameMap() {
   const setNextQuestion = useGameStore((state) => state.setNextQuestion);
   const setPoints = useGameStore((state) => state.setPoints);
   const revealAnswer = useGameStore((state) => state.revealAnswer);
-  const latAnswer = useGameStore((state) => state.coordinates.lat);
-  const lngAnswer = useGameStore((state) => state.coordinates.lng);
   const setTimerStops = useGameStore((state) => state.setTimerStops);
   const setRevealAnswer = useGameStore((state) => state.setRevealAnswer);
   const questionNumber = useGameStore((state) => state.questionNumber);
+
+  const currentQuestion = useGameStore(
+    (state) => state.selectedQuestions[state.questionNumber]
+  );
+  const {
+    coordinates: { lat: latAnswer, lng: lngAnswer },
+  } = currentQuestion;
 
   const mapRef = useRef<L.Map | null>(null);
   const markerGuessRef = useRef<L.Marker | null>(null);
