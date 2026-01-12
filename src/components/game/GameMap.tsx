@@ -11,7 +11,6 @@ export default function GameMap() {
   const setPoints = useGameStore((state) => state.setPoints);
   const revealAnswer = useGameStore((state) => state.revealAnswer);
   const setTimerStops = useGameStore((state) => state.setTimerStops);
-  const setRevealAnswer = useGameStore((state) => state.setRevealAnswer);
   const questionNumber = useGameStore((state) => state.questionNumber);
 
   const currentQuestion = useGameStore(
@@ -76,7 +75,6 @@ export default function GameMap() {
 
       setPoints(lat, lng);
       setTimerStops();
-      setRevealAnswer();
     }
 
     map.on("click", handleClick);

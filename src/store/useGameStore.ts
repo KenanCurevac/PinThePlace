@@ -23,9 +23,8 @@ export type useGameStoreProps = {
   review: ReviewType[];
   scrollToNum: null | number;
   setNextQuestion: () => void;
-  setPoints: (lat: number, lng: number) => void;
+  setPoints: (lat: number | null, lng: number | null) => void;
   setTimerStops: () => void;
-  setRevealAnswer: () => void;
   setScrollTo: (questionNum: number) => void;
   setNewQuestions: () => void;
 };
@@ -57,7 +56,7 @@ export const useGameStore = create<useGameStoreProps>((set) => {
         };
       }),
 
-    setPoints: (latGuess: number, lngGuess: number) =>
+    setPoints: (latGuess: number | null, lngGuess: number | null) =>
       set((state: useGameStoreProps) => {
         const currentQuestion = state.selectedQuestions[state.questionNumber];
         const {
@@ -65,12 +64,16 @@ export const useGameStore = create<useGameStoreProps>((set) => {
         } = currentQuestion;
 
         const distance =
-          Math.round(
-            getDistance(latGuess, lngGuess, latAnswer, lngAnswer) * 100
-          ) / 100;
+          latGuess === null || lngGuess === null
+            ? null
+            : Math.round(
+                getDistance(latGuess, lngGuess, latAnswer, lngAnswer) * 100
+              ) / 100;
 
         let newPoints = 0;
-        if (distance < 500) {
+        if (distance === null) {
+          newPoints = 0;
+        } else if (distance < 500) {
           newPoints = 5;
         } else if (distance < 1000) {
           newPoints = 4;
@@ -87,6 +90,20 @@ export const useGameStore = create<useGameStoreProps>((set) => {
           totalPoints: state.totalPoints + newPoints,
           distance: distance,
           revealAnswer: true,
+          review: [
+            ...state.review,
+            {
+              questionNumber: state.questionNumber,
+              question: currentQuestion.question,
+              answer: currentQuestion.answer,
+              coordinates: {
+                lat: latAnswer,
+                lng: lngAnswer,
+              },
+              points: newPoints,
+              distance: distance,
+            },
+          ],
         };
       }),
 
@@ -94,30 +111,6 @@ export const useGameStore = create<useGameStoreProps>((set) => {
       set((state: useGameStoreProps) => ({
         timerStops: true,
       }));
-    },
-
-    setRevealAnswer: () => {
-      set((state: useGameStoreProps) => {
-        return {
-          revealAnswer: true,
-          review: [
-            ...state.review,
-            {
-              questionNumber: state.questionNumber,
-              question: state.selectedQuestions[state.questionNumber].question,
-              answer: state.selectedQuestions[state.questionNumber].answer,
-              coordinates: {
-                lat: state.selectedQuestions[state.questionNumber].coordinates
-                  .lat,
-                lng: state.selectedQuestions[state.questionNumber].coordinates
-                  .lng,
-              },
-              points: state.points,
-              distance: state.distance,
-            },
-          ],
-        };
-      });
     },
 
     setScrollTo: (questionNum) => {

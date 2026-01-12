@@ -17,7 +17,7 @@ const CircularProgress = ({
 }: CircularProgressProps) => {
   const questionNumber = useGameStore((state) => state.questionNumber);
   const timerStops = useGameStore((state) => state.timerStops);
-  const setRevealAnswer = useGameStore((state) => state.setRevealAnswer);
+  const setPoints = useGameStore((state) => state.setPoints);
   const revealAnswer = useGameStore((state) => state.revealAnswer);
 
   const timerRef = useRef<number | null>(null);
@@ -63,7 +63,7 @@ const CircularProgress = ({
 
   useEffect(() => {
     if (timeLeft <= 0 && !revealAnswer) {
-      setRevealAnswer();
+      setPoints(null, null);
     }
   }, [timeLeft]);
 
