@@ -20,20 +20,18 @@ export type useGameStoreProps = {
   distance: number | null;
   timerStops: boolean;
   revealAnswer: boolean;
-  review: ReviewType[];
   scrollToNum: null | number;
+  review: ReviewType[];
+  submitAnswer: (lat: number | null, lng: number | null) => void;
   setNextQuestion: () => void;
-  setPoints: (lat: number | null, lng: number | null) => void;
+  setNewQuestions: () => void;
   setTimerStops: () => void;
   setScrollTo: (questionNum: number) => void;
-  setNewQuestions: () => void;
 };
 
 export const useGameStore = create<useGameStoreProps>((set) => {
-  const initialQuestions = getSelectedQuestions();
-
   return {
-    selectedQuestions: initialQuestions,
+    selectedQuestions: getSelectedQuestions(),
     questionNumber: 0,
     points: 0,
     totalPoints: 0,
@@ -43,20 +41,7 @@ export const useGameStore = create<useGameStoreProps>((set) => {
     scrollToNum: null,
     review: [],
 
-    setNextQuestion: () =>
-      set((state: useGameStoreProps) => {
-        const nextIndex = state.questionNumber + 1;
-
-        return {
-          questionNumber: nextIndex,
-          points: 0,
-          distance: null,
-          timerStops: false,
-          revealAnswer: false,
-        };
-      }),
-
-    setPoints: (latGuess: number | null, lngGuess: number | null) =>
+    submitAnswer: (latGuess: number | null, lngGuess: number | null) =>
       set((state: useGameStoreProps) => {
         const currentQuestion = state.selectedQuestions[state.questionNumber];
         const {
@@ -96,10 +81,7 @@ export const useGameStore = create<useGameStoreProps>((set) => {
               questionNumber: state.questionNumber,
               question: currentQuestion.question,
               answer: currentQuestion.answer,
-              coordinates: {
-                lat: latAnswer,
-                lng: lngAnswer,
-              },
+              coordinates: { lat: latAnswer, lng: lngAnswer },
               points: newPoints,
               distance: distance,
             },
@@ -107,32 +89,37 @@ export const useGameStore = create<useGameStoreProps>((set) => {
         };
       }),
 
-    setTimerStops: () => {
-      set((state: useGameStoreProps) => ({
-        timerStops: true,
-      }));
-    },
-
-    setScrollTo: (questionNum) => {
-      set((state) => ({ scrollToNum: questionNum }));
-    },
-
-    setNewQuestions: () => {
-      set((state) => {
-        const newQuestions = getSelectedQuestions();
-
+    setNextQuestion: () =>
+      set((state: useGameStoreProps) => {
         return {
-          selectedQuestions: newQuestions,
-          questionNumber: 0,
+          questionNumber: state.questionNumber + 1,
           points: 0,
-          totalPoints: 0,
           distance: null,
           timerStops: false,
           revealAnswer: false,
-          scrollTo: null,
-          review: [],
         };
+      }),
+
+    setNewQuestions: () => {
+      set({
+        selectedQuestions: getSelectedQuestions(),
+        questionNumber: 0,
+        points: 0,
+        totalPoints: 0,
+        distance: null,
+        timerStops: false,
+        revealAnswer: false,
+        scrollToNum: null,
+        review: [],
       });
+    },
+
+    setTimerStops: () => {
+      set({ timerStops: true });
+    },
+
+    setScrollTo: (questionNum) => {
+      set({ scrollToNum: questionNum });
     },
   };
 });

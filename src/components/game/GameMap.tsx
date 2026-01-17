@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function GameMap() {
   const setNextQuestion = useGameStore((state) => state.setNextQuestion);
-  const setPoints = useGameStore((state) => state.setPoints);
+  const submitAnswer = useGameStore((state) => state.submitAnswer);
   const revealAnswer = useGameStore((state) => state.revealAnswer);
   const setTimerStops = useGameStore((state) => state.setTimerStops);
   const questionNumber = useGameStore((state) => state.questionNumber);
@@ -23,7 +23,6 @@ export default function GameMap() {
   const mapRef = useRef<L.Map | null>(null);
   const markerGuessRef = useRef<L.Marker | null>(null);
   const markerAnswerRef = useRef<L.Marker | null>(null);
-  const [newQuestionTrigger, setNewQuestionTrigger] = useState(false);
 
   useEffect(() => {
     const key = "wjzrcvMblbDm0EMT5nG8";
@@ -73,7 +72,7 @@ export default function GameMap() {
       const markerGuess = L.marker([lat, lng], { icon: redIcon }).addTo(map);
       markerGuessRef.current = markerGuess;
 
-      setPoints(lat, lng);
+      submitAnswer(lat, lng);
       setTimerStops();
     }
 
@@ -86,7 +85,7 @@ export default function GameMap() {
         markerGuessRef.current = null;
       }
     };
-  }, [newQuestionTrigger]);
+  }, [questionNumber]);
 
   useEffect(() => {
     if (!mapRef.current || !revealAnswer) return;
@@ -119,10 +118,7 @@ export default function GameMap() {
       {revealAnswer && questionNumber < 9 && (
         <button
           className="w-56 md:w-72 lg:w-1/2 h-10 md:h-12 lg:h-1/7 bg-[linear-gradient(175deg,#18838f,#4ab7c3)] hover:bg-[linear-gradient(175deg,#4ac3af,#7bd8cc)] absolute z-1000 right-0 left-0 bottom-7 lg:bottom-6 mx-auto rounded-4xl drop-shadow-[2px_2px_4px_black] p-1 text-xl md:text-2xl lg:text-3xl hover:text-2xl md:hover:text-[1.75rem] lg:hover:text-[2.15rem] font-semibold font-sans tracking-wide flex flex-col items-center justify-center cursor-pointer"
-          onClick={() => {
-            setNextQuestion();
-            setNewQuestionTrigger((trigger) => !trigger);
-          }}
+          onClick={setNextQuestion}
         >
           Next Question
         </button>
