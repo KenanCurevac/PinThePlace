@@ -1,91 +1,20 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import "leaflet/dist/leaflet.css";
 import { useGameStore } from "@/store/useGameStore";
-import L from "leaflet";
-import Link from "next/link";
 import useLeafletMap from "@/app/hooks/useLeafletMap";
+import useGuessAnswer from "@/app/hooks/useGuessAnswer";
+import useShowAnswer from "@/app/hooks/useShowAnswer";
+import Link from "next/link";
+import "leaflet/dist/leaflet.css";
 
 export default function GameMap() {
   const setNextQuestion = useGameStore((state) => state.setNextQuestion);
-  const submitAnswer = useGameStore((state) => state.submitAnswer);
   const revealAnswer = useGameStore((state) => state.revealAnswer);
-  const setTimerStops = useGameStore((state) => state.setTimerStops);
   const questionNumber = useGameStore((state) => state.questionNumber);
 
-  const currentQuestion = useGameStore(
-    (state) => state.selectedQuestions[state.questionNumber]
-  );
-  const {
-    coordinates: { lat: latAnswer, lng: lngAnswer },
-  } = currentQuestion;
-
-  const markerGuessRef = useRef<L.Marker | null>(null);
-  const markerAnswerRef = useRef<L.Marker | null>(null);
   const mapRef = useLeafletMap("map-game", false);
-
-  useEffect(() => {
-    if (!mapRef.current) {
-      return;
-    }
-
-    const map = mapRef.current;
-    map.setView([20, 10], 2);
-
-    const redIcon = L.icon({
-      iconUrl: "/red-pin.png",
-      iconSize: [30, 40],
-      iconAnchor: [15, 40],
-      popupAnchor: [0, -40],
-    });
-
-    function handleClick(e: L.LeafletMouseEvent) {
-      const { lat, lng } = e.latlng;
-
-      const markerGuess = L.marker([lat, lng], { icon: redIcon }).addTo(map);
-      markerGuessRef.current = markerGuess;
-
-      submitAnswer(lat, lng);
-      setTimerStops();
-    }
-
-    map.on("click", handleClick);
-
-    return () => {
-      map.off("click");
-      if (markerGuessRef.current) {
-        markerGuessRef.current.remove();
-        markerGuessRef.current = null;
-      }
-    };
-  }, [questionNumber]);
-
-  useEffect(() => {
-    if (!mapRef.current || !revealAnswer) return;
-
-    const map = mapRef.current;
-    map.off("click");
-
-    const greenIcon = L.icon({
-      iconUrl: "/green-pin.png",
-      iconSize: [30, 40],
-      iconAnchor: [15, 40],
-      popupAnchor: [0, -40],
-    });
-
-    const markerAnswer = L.marker([latAnswer, lngAnswer], {
-      icon: greenIcon,
-    }).addTo(map);
-    markerAnswerRef.current = markerAnswer;
-
-    return () => {
-      if (markerAnswerRef.current) {
-        markerAnswerRef.current.remove();
-        markerAnswerRef.current = null;
-      }
-    };
-  }, [revealAnswer]);
+  useGuessAnswer(mapRef);
+  useShowAnswer(mapRef);
 
   return (
     <div className="relative w-full h-full">
