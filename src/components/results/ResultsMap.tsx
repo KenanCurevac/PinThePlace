@@ -1,45 +1,18 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 import { useGameStore } from "@/store/useGameStore";
 import L from "leaflet";
 import { useMediaQuery } from "react-responsive";
+import useLeafletMap from "@/app/hooks/useLeafletMap";
 
 export default function ResultsMap() {
   const review = useGameStore((state) => state.review);
   const setScrollTo = useGameStore((state) => state.setScrollTo);
 
-  const mapRef = useRef<L.Map | null>(null);
-
   const isMobile = useMediaQuery({ maxWidth: 768 });
-
-  useEffect(() => {
-    const key = "wjzrcvMblbDm0EMT5nG8";
-
-    const map = L.map("resultsMap").setView([20, 10], isMobile ? 1 : 2);
-    L.tileLayer(
-      `https://api.maptiler.com/tiles/satellite-mediumres/{z}/{x}/{y}.png?key=${key}`,
-      {
-        tileSize: 512,
-        zoomOffset: -1,
-        minZoom: 1,
-        maxZoom: 13,
-        attribution:
-          '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
-        crossOrigin: true,
-      }
-    ).addTo(map);
-
-    mapRef.current = map;
-
-    return () => {
-      if (mapRef.current) {
-        mapRef.current.remove();
-        mapRef.current = null;
-      }
-    };
-  }, []);
+  const mapRef = useLeafletMap("map-results", isMobile);
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -97,7 +70,7 @@ export default function ResultsMap() {
 
   return (
     <div
-      id="resultsMap"
+      id="map-results"
       style={{
         height: "100%",
         maxWidth: "100%",

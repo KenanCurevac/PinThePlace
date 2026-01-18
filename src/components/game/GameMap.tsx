@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import { useGameStore } from "@/store/useGameStore";
 import L from "leaflet";
 import Link from "next/link";
+import useLeafletMap from "@/app/hooks/useLeafletMap";
 
 export default function GameMap() {
   const setNextQuestion = useGameStore((state) => state.setNextQuestion);
@@ -20,36 +21,9 @@ export default function GameMap() {
     coordinates: { lat: latAnswer, lng: lngAnswer },
   } = currentQuestion;
 
-  const mapRef = useRef<L.Map | null>(null);
   const markerGuessRef = useRef<L.Marker | null>(null);
   const markerAnswerRef = useRef<L.Marker | null>(null);
-
-  useEffect(() => {
-    const key = "wjzrcvMblbDm0EMT5nG8";
-
-    const map = L.map("map").setView([20, 10], 2);
-    L.tileLayer(
-      `https://api.maptiler.com/tiles/satellite-mediumres/{z}/{x}/{y}.png?key=${key}`,
-      {
-        tileSize: 512,
-        zoomOffset: -1,
-        minZoom: 1,
-        maxZoom: 13,
-        attribution:
-          '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
-        crossOrigin: true,
-      }
-    ).addTo(map);
-
-    mapRef.current = map;
-
-    return () => {
-      if (mapRef.current) {
-        mapRef.current.remove();
-        mapRef.current = null;
-      }
-    };
-  }, []);
+  const mapRef = useLeafletMap("map-game", false);
 
   useEffect(() => {
     if (!mapRef.current) {
@@ -132,7 +106,7 @@ export default function GameMap() {
         </Link>
       )}
       <div
-        id="map"
+        id="map-game"
         style={{
           height: "100%",
           maxWidth: "100%",
