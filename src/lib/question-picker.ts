@@ -1,5 +1,5 @@
 import { allQuestions } from "./questions";
-import { Question } from "./QuestionTypes";
+import { Question } from "../types/question";
 
 export function getSelectedQuestions(): Question[] {
   const indexArray: number[] = [];

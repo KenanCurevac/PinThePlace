@@ -1,35 +1,9 @@
 import { create } from "zustand";
 import { getSelectedQuestions } from "@/lib/question-picker";
 import { getDistance } from "@/lib/distance-formula";
-import { Question } from "@/lib/QuestionTypes";
+import { GameStore } from "@/types/gameStore";
 
-type ReviewType = {
-  questionNumber: number;
-  question: string;
-  answer: string;
-  coordinates: { lat: number; lng: number };
-  points: number;
-  distance: number | null;
-};
-
-export type useGameStoreProps = {
-  selectedQuestions: Question[];
-  questionNumber: number;
-  points: number;
-  totalPoints: number;
-  distance: number | null;
-  timerStops: boolean;
-  revealAnswer: boolean;
-  scrollToNum: null | number;
-  review: ReviewType[];
-  submitAnswer: (lat: number | null, lng: number | null) => void;
-  setNextQuestion: () => void;
-  setNewQuestions: () => void;
-  setTimerStops: () => void;
-  setScrollTo: (questionNum: number) => void;
-};
-
-export const useGameStore = create<useGameStoreProps>((set) => {
+export const useGameStore = create<GameStore>((set) => {
   return {
     selectedQuestions: getSelectedQuestions(),
     questionNumber: 0,
@@ -42,7 +16,7 @@ export const useGameStore = create<useGameStoreProps>((set) => {
     review: [],
 
     submitAnswer: (latGuess: number | null, lngGuess: number | null) =>
-      set((state: useGameStoreProps) => {
+      set((state: GameStore) => {
         const currentQuestion = state.selectedQuestions[state.questionNumber];
         const {
           coordinates: { lat: latAnswer, lng: lngAnswer },
@@ -52,7 +26,7 @@ export const useGameStore = create<useGameStoreProps>((set) => {
           latGuess === null || lngGuess === null
             ? null
             : Math.round(
-                getDistance(latGuess, lngGuess, latAnswer, lngAnswer) * 100
+                getDistance(latGuess, lngGuess, latAnswer, lngAnswer) * 100,
               ) / 100;
 
         let newPoints = 0;
@@ -90,7 +64,7 @@ export const useGameStore = create<useGameStoreProps>((set) => {
       }),
 
     setNextQuestion: () =>
-      set((state: useGameStoreProps) => {
+      set((state: GameStore) => {
         return {
           questionNumber: state.questionNumber + 1,
           points: 0,
