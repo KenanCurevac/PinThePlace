@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import useLeafletMap from "@/app/hooks/useLeafletMap";
-import useShowAllAnswers from "@/app/hooks/useShowAllAnswers";
+import useLeafletMap from "@/hooks/useLeafletMap";
+import useShowAllAnswers from "@/hooks/useShowAllAnswers";
 import "leaflet/dist/leaflet.css";
 
 export default function ResultsMap() {

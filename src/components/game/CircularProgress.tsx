@@ -1,4 +1,4 @@
-import useManageTimer from "@/app/hooks/useManageTimer";
+import useManageTimer from "@/hooks/useManageTimer";
 
 type CircularProgressProps = {
   size: number;

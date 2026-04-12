@@ -1,9 +1,9 @@
 "use client";
 
 import { useGameStore } from "@/store/useGameStore";
-import useLeafletMap from "@/app/hooks/useLeafletMap";
-import useGuessAnswer from "@/app/hooks/useGuessAnswer";
-import useShowAnswer from "@/app/hooks/useShowAnswer";
+import useLeafletMap from "@/hooks/useLeafletMap";
+import useGuessAnswer from "@/hooks/useGuessAnswer";
+import useShowAnswer from "@/hooks/useShowAnswer";
 import Link from "next/link";
 import "leaflet/dist/leaflet.css";
 
