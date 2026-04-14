@@ -2,15 +2,17 @@ import { useEffect, useRef } from "react";
 import { MutableRefObject } from "react";
 import L from "leaflet";
 import { useGameStore } from "@/store/useGameStore";
+import { useParams } from "next/navigation";
+import { useGameState } from "./useGameState";
 
 export default function useShowAnswer(mapRef: MutableRefObject<L.Map | null>) {
+  const params = useParams();
+  const gameId = params.gameId as string;
+
   const revealAnswer = useGameStore((state) => state.revealAnswer);
-  const currentQuestion = useGameStore(
-    (state) => state.selectedQuestions[state.questionNumber]
-  );
-  const {
-    coordinates: { lat: latAnswer, lng: lngAnswer },
-  } = currentQuestion;
+  const questionNumber = useGameStore((state) => state.questionNumber);
+
+  const { data } = useGameState(gameId);
 
   const markerAnswerRef = useRef<L.Marker | null>(null);
 
@@ -19,6 +21,12 @@ export default function useShowAnswer(mapRef: MutableRefObject<L.Map | null>) {
 
     const map = mapRef.current;
     map.off("click");
+
+    const currentQuestion = data?.questions?.[questionNumber];
+    const latAnswer = currentQuestion?.correct?.lat;
+    const lngAnswer = currentQuestion?.correct?.lng;
+
+    if (!latAnswer || !lngAnswer) return;
 
     const greenIcon = L.icon({
       iconUrl: "/green-pin.png",
@@ -38,5 +46,5 @@ export default function useShowAnswer(mapRef: MutableRefObject<L.Map | null>) {
         markerAnswerRef.current = null;
       }
     };
-  }, [revealAnswer]);
+  }, [revealAnswer, data]);
 }

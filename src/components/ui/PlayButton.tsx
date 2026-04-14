@@ -1,6 +1,6 @@
 "use client";
 
-import { useCreateGame } from "@/hooks/useGames";
+import { useCreateGame } from "@/hooks/useCreateGame";
 import { useRouter } from "next/navigation";
 
 type PlayButtonProps = {
