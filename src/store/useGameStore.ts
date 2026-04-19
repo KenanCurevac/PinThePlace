@@ -74,26 +74,12 @@ export const useGameStore = create<GameStore>((set) => {
         };
       }),
 
-    setNewQuestions: () => {
-      set({
-        selectedQuestions: getSelectedQuestions(),
-        questionNumber: 0,
-        points: 0,
-        totalPoints: 0,
-        distance: null,
-        timerStops: false,
-        revealAnswer: false,
-        scrollToNum: null,
-        review: [],
-      });
-    },
-
     setTimerStops: () => {
       set({ timerStops: true });
     },
 
-    setScrollTo: (questionNum) => {
-      set({ scrollToNum: questionNum });
+    setScrollTo: (index) => {
+      set({ scrollToNum: index });
     },
   };
 });

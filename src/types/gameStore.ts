@@ -13,7 +13,6 @@ export type GameStore = {
   review: Review[];
   submitAnswer: (lat: number | null, lng: number | null) => void;
   setNextQuestion: () => void;
-  setNewQuestions: () => void;
   setTimerStops: () => void;
   setScrollTo: (questionNum: number) => void;
 };

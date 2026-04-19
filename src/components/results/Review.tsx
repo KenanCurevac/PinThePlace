@@ -1,27 +1,35 @@
 "use client";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useGetResult } from "@/hooks/useGetResult";
 import { useGameStore } from "@/store/useGameStore";
+import { useParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 
 export default function Review() {
-  const review = useGameStore((state) => state.review);
   const scrollToNum = useGameStore((state) => state.scrollToNum);
 
   const questionRef = useRef<(HTMLLIElement | null)[]>([]);
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
-  useEffect(() => {
-    const index = review.findIndex(
-      (question) => question.questionNumber === scrollToNum
-    );
+  const params = useParams();
+  const gameId = params.gameId;
 
-    questionRef.current[index]?.scrollIntoView({
+  const { data } = useGetResult(gameId as string);
+
+  useEffect(() => {
+    if (scrollToNum === null || scrollToNum === undefined) return;
+
+    questionRef.current[scrollToNum]?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
   }, [scrollToNum]);
+
+  if (!data) return <p>No data</p>;
+
+  const results = data.results;
 
   return (
     <ScrollArea
@@ -34,29 +42,34 @@ export default function Review() {
         Review
       </h3>
       <ol>
-        {review.map((question, i) => {
+        {results.map((result, i) => {
+          const formattedDistance =
+            result.distance !== null && result.distance !== undefined
+              ? result.distance.toFixed(2)
+              : null;
+
           return (
             <li
-              key={question.questionNumber}
+              key={i}
               className="bg-[#004551] mb-4 text-3xl p-4 text-white rounded-3xl flex flex-col gap-2"
               ref={(el) => {
                 questionRef.current[i] = el;
               }}
             >
               <h4 className="text-center">
-                {question.questionNumber + 1}. {question.question}
+                {i + 1}. {result.question}
               </h4>
               <hr className="w-full h-[0.75px] bg-white"></hr>
-              <p className="text-center">{question.answer}</p>
+              <p className="text-center">{result.answer}</p>
               <hr className="w-full h-[0.75px] bg-white"></hr>
               <div className="flex flex-col xs:flex-row md:flex-col lg:flex-row gap-2 items-center xs:items-start md:items-center lg:items-start">
                 <div className="w-full xs:w-[48%] text-center">
-                  Points: {question.points}
+                  Points: {result.points}
                 </div>
                 <hr className="w-full h-[0.75px] bg-white xs:hidden md:block lg:hidden"></hr>
                 <div className="w-full xs:w-[48%] md:w-full lg:w-[48%] text-center">
-                  Distance: {question.distance}
-                  {question.distance ? " km" : "Skipped"}
+                  Distance: {formattedDistance}
+                  {formattedDistance ? " km" : "Skipped"}
                 </div>
               </div>
             </li>

@@ -30,3 +30,8 @@ export const submitGuess = async ({
   });
   return data;
 };
+
+export const getGameResult = async (gameId: string) => {
+  const { data } = await api.get(`/game/${gameId}/results`);
+  return data;
+};

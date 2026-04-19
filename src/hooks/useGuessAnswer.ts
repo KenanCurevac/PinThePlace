@@ -5,14 +5,16 @@ import { useGameStore } from "@/store/useGameStore";
 import { useParams } from "next/navigation";
 import { useSubmitGuess } from "./useSubmitGuess";
 import { useQueryClient } from "@tanstack/react-query";
+import { useGameState } from "./useGameState";
 
 export default function useGuessAnswer(mapRef: MutableRefObject<L.Map | null>) {
   const params = useParams();
   const gameId = params.gameId as string;
 
-  const submitAnswer = useGameStore((state) => state.submitAnswer);
-  const questionNumber = useGameStore((state) => state.questionNumber);
   const setTimerStops = useGameStore((state) => state.setTimerStops);
+
+  const { data, isLoading, isError } = useGameState(gameId);
+  const questionId = data?.currentQuestion?.questionId;
 
   const submitGuessMutation = useSubmitGuess();
   const queryClient = useQueryClient();
@@ -37,15 +39,11 @@ export default function useGuessAnswer(mapRef: MutableRefObject<L.Map | null>) {
     function handleClick(e: L.LeafletMouseEvent) {
       const { lat, lng } = e.latlng;
 
-      const state = queryClient.getQueryData<any>(["gameState", gameId]);
-
-      const questionId = state?.questions?.[questionNumber]?.questionId;
       if (!questionId) return;
 
       const markerGuess = L.marker([lat, lng], { icon: redIcon }).addTo(map);
       markerGuessRef.current = markerGuess;
 
-      submitAnswer(lat, lng);
       setTimerStops();
 
       submitGuessMutation.mutate(
@@ -69,5 +67,5 @@ export default function useGuessAnswer(mapRef: MutableRefObject<L.Map | null>) {
         markerGuessRef.current = null;
       }
     };
-  }, [questionNumber]);
+  }, [questionId]);
 }

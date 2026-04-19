@@ -1,7 +1,6 @@
 "use client";
 
 import { useGameState } from "@/hooks/useGameState";
-import { useGameStore } from "@/store/useGameStore";
 import { useParams } from "next/navigation";
 
 export default function Distance() {
@@ -10,13 +9,11 @@ export default function Distance() {
 
   const { data, isLoading, isError } = useGameState(gameId as string);
 
-  const questionNumber = useGameStore((state) => state.questionNumber);
-
   if (isLoading) return <p>Loading...</p>;
 
   if (isError) return <p>Error</p>;
 
-  const distance = data.questions?.[questionNumber]?.guess?.distance ?? 0;
+  const distance = data.currentQuestion?.guess?.distance ?? 0;
   const formattedDistance = distance !== undefined ? distance.toFixed(2) : null;
 
   return (
