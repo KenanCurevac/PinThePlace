@@ -9,7 +9,7 @@ export default function useShowAnswer(mapRef: MutableRefObject<L.Map | null>) {
   const gameId = params.gameId as string;
 
   const { data, isLoading, isError } = useGameState(gameId);
-  const guessMade = data?.currentQuestion?.guess?.lat;
+  const guessMade = data?.currentQuestion?.guess;
   const currentQuestion = data?.currentQuestion;
   const latAnswer = currentQuestion?.correct?.lat;
   const lngAnswer = currentQuestion?.correct?.lng;
@@ -20,7 +20,10 @@ export default function useShowAnswer(mapRef: MutableRefObject<L.Map | null>) {
     if (!mapRef.current || !data) return;
 
     const map = mapRef.current;
-    map.off("click");
+
+    if (guessMade) {
+      map.off("click");
+    }
 
     if (!latAnswer || !lngAnswer) return;
 

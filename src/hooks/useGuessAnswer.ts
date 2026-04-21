@@ -11,18 +11,18 @@ export default function useGuessAnswer(mapRef: MutableRefObject<L.Map | null>) {
   const params = useParams();
   const gameId = params.gameId as string;
 
-  const setTimerStops = useGameStore((state) => state.setTimerStops);
-
   const { data, isLoading, isError } = useGameState(gameId);
   const questionId = data?.currentQuestion?.questionId;
+  const guess = data?.currentQuestion?.guess;
 
   const submitGuessMutation = useSubmitGuess();
   const queryClient = useQueryClient();
+  const setTimerStops = useGameStore((state) => state.setTimerStops);
 
   const markerGuessRef = useRef<L.Marker | null>(null);
 
   useEffect(() => {
-    if (!mapRef.current) {
+    if (!mapRef.current || !data) {
       return;
     }
 
@@ -39,12 +39,8 @@ export default function useGuessAnswer(mapRef: MutableRefObject<L.Map | null>) {
     function handleClick(e: L.LeafletMouseEvent) {
       const { lat, lng } = e.latlng;
 
-      if (!questionId) return;
-
       const markerGuess = L.marker([lat, lng], { icon: redIcon }).addTo(map);
       markerGuessRef.current = markerGuess;
-
-      setTimerStops();
 
       submitGuessMutation.mutate(
         { gameId, questionId, guessLat: lat, guessLng: lng },
@@ -59,6 +55,12 @@ export default function useGuessAnswer(mapRef: MutableRefObject<L.Map | null>) {
     }
 
     map.on("click", handleClick);
+
+    if (!markerGuessRef.current && guess) {
+      markerGuessRef.current = L.marker([guess.lat, guess.lng], {
+        icon: redIcon,
+      }).addTo(map);
+    }
 
     return () => {
       map.off("click");

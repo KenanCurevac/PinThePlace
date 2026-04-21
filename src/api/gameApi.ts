@@ -13,8 +13,8 @@ export const getGameState = async (gameId: string) => {
 type SubmitGuessPayload = {
   gameId: string;
   questionId: string;
-  guessLat: number;
-  guessLng: number;
+  guessLat: number | null;
+  guessLng: number | null;
 };
 
 export const submitGuess = async ({
@@ -28,6 +28,11 @@ export const submitGuess = async ({
     guessLat,
     guessLng,
   });
+  return data;
+};
+
+export const nextQuestion = async (gameId: string) => {
+  const { data } = await api.post(`/game/${gameId}/next`);
   return data;
 };
 
