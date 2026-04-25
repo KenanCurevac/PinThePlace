@@ -7,12 +7,14 @@ export type GameStore = {
   points: number;
   totalPoints: number;
   distance: number | null;
-  timerStops: boolean;
+  timerStopped: boolean;
   revealAnswer: boolean;
   scrollToNum: null | number;
   review: Review[];
+  isCalculating: boolean;
   submitAnswer: (lat: number | null, lng: number | null) => void;
   setNextQuestion: () => void;
-  setTimerStops: () => void;
+  setTimerStopped: (stopped: boolean) => void;
   setScrollTo: (questionNum: number) => void;
+  setIsCalculating: (value: boolean) => void;
 };

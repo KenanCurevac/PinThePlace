@@ -1,18 +1,12 @@
 "use client";
 
-import { useGameState } from "@/hooks/useGameState";
-import { useParams } from "next/navigation";
+import { GameState } from "@/types/GameState";
 
-export default function Distance() {
-  const params = useParams();
-  const gameId = params.gameId;
+type Props = {
+  data: GameState;
+};
 
-  const { data, isLoading, isError } = useGameState(gameId as string);
-
-  if (isLoading) return <p>Loading...</p>;
-
-  if (isError) return <p>Error</p>;
-
+export default function Distance({ data }: Props) {
   const distance = data.currentQuestion?.guess?.distance ?? 0;
   const formattedDistance = distance !== undefined ? distance.toFixed(2) : null;
 

@@ -1,18 +1,12 @@
 "use client";
 
-import { useGameState } from "@/hooks/useGameState";
-import { useParams } from "next/navigation";
+import { GameState } from "@/types/gameState";
 
-export default function Points() {
-  const params = useParams();
-  const gameId = params.gameId;
+type Props = {
+  data: GameState;
+};
 
-  const { data, isLoading, isError } = useGameState(gameId as string);
-
-  if (isLoading) return <p>Loading...</p>;
-
-  if (isError) return <p>Error</p>;
-
+export default function Points({ data }: Props) {
   const points = data.currentQuestion?.guess?.points ?? 0;
 
   return (

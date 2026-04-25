@@ -1,32 +1,30 @@
 import { useGameStore } from "@/store/useGameStore";
 import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { useGameState } from "./useGameState";
 import { useSubmitGuess } from "./useSubmitGuess";
 import { useQueryClient } from "@tanstack/react-query";
+import { GameState } from "@/types/gameState";
 
 const TOTAL_TIME = 100;
 const TOTAL_SECONDS = 15;
 
-export default function useManageTimer() {
+export default function useManageTimer(data: GameState) {
   const params = useParams();
   const gameId = params.gameId as string;
 
-  const { data } = useGameState(gameId);
   const gameStarted = data?.currentQuestion?.startedAt;
   const questionId = data?.currentQuestion?.questionId;
   const guessMade = data?.currentQuestion?.guess;
 
   const submitGuessMutation = useSubmitGuess();
   const queryClient = useQueryClient();
-  const timerStops = useGameStore((state) => state.timerStops);
-  const setTimerStops = useGameStore((state) => state.setTimerStops);
+  const timerStopped = useGameStore((state) => state.timerStopped);
 
   const timerRef = useRef<number | null>(null);
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
 
   useEffect(() => {
-    if (!gameStarted) return;
+    if (!gameStarted || guessMade) return;
 
     const updateTime = () => {
       const startedAt = new Date(gameStarted).getTime();
@@ -62,11 +60,11 @@ export default function useManageTimer() {
   }, [questionId]);
 
   useEffect(() => {
-    if (guessMade && timerRef.current) {
+    if (timerStopped && timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
     }
-  }, [guessMade]);
+  }, [timerStopped]);
 
   useEffect(() => {
     if (timeLeft <= 0 && !guessMade) {

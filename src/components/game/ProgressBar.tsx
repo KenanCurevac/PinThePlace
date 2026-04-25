@@ -2,8 +2,13 @@
 
 import { useMediaQuery } from "react-responsive";
 import CircularProgress from "./CircularProgress";
+import { GameState } from "@/types/gameState";
 
-export default function ProgressBar() {
+type Props = {
+  data: GameState;
+};
+
+export default function ProgressBar({ data }: Props) {
   const midScreen = useMediaQuery({ minWidth: 768 });
   const largeScreen = useMediaQuery({ minWidth: 1024 });
 
@@ -18,7 +23,12 @@ export default function ProgressBar() {
 
   return (
     <div className="max-w-xs mx-auto w-full flex flex-col items-center">
-      <CircularProgress size={size} strokeWidth={20} showLabel={showLabel} />
+      <CircularProgress
+        size={size}
+        strokeWidth={20}
+        showLabel={showLabel}
+        data={data}
+      />
     </div>
   );
 }

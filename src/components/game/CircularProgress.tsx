@@ -1,17 +1,20 @@
 import useManageTimer from "@/hooks/useManageTimer";
+import { GameState } from "@/types/GameState";
 
 type CircularProgressProps = {
   size: number;
   strokeWidth: number;
   showLabel: boolean;
+  data: GameState;
 };
 
 export default function CircularProgress({
   size,
   strokeWidth,
   showLabel,
+  data,
 }: CircularProgressProps) {
-  const timeLeft = useManageTimer();
+  const timeLeft = useManageTimer(data);
 
   const radius = size / 2 - 10;
   const circumference = Math.ceil(3.14 * radius * 2);

@@ -18,7 +18,14 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main className="h-[100dvh] bg-[url('/earth-at-night.jpg')] bg-cover bg-center flex flex-col items-center mx-auto">
+    <main className="relative h-[100dvh] flex flex-col items-center mx-auto">
+      <Image
+        src="/earth-at-night.jpg"
+        alt="Earth at night"
+        fill
+        priority
+        className="object-cover -z-10"
+      />
       <Image
         src="/logo-ptp.png"
         width={647}

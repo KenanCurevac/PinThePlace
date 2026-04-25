@@ -2,18 +2,13 @@ import { useEffect } from "react";
 import { MutableRefObject } from "react";
 import L from "leaflet";
 import { useGameStore } from "@/store/useGameStore";
-import { useParams } from "next/navigation";
-import { useGetResult } from "./useGetResult";
+import { Results } from "@/types/results";
 
 export default function useShowAllAnswers(
   mapRef: MutableRefObject<L.Map | null>,
+  data: Results,
 ) {
   const setScrollTo = useGameStore((state) => state.setScrollTo);
-
-  const params = useParams();
-  const gameId = params.gameId;
-
-  const { data } = useGetResult(gameId as string);
 
   useEffect(() => {
     if (!mapRef.current || !data) return;

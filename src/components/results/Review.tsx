@@ -1,22 +1,20 @@
 "use client";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useGetResult } from "@/hooks/useGetResult";
 import { useGameStore } from "@/store/useGameStore";
-import { useParams } from "next/navigation";
+import { Results } from "@/types/results";
 import { useEffect, useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 
-export default function Review() {
+type Props = {
+  data: Results;
+};
+
+export default function Review({ data }: Props) {
   const scrollToNum = useGameStore((state) => state.scrollToNum);
 
   const questionRef = useRef<(HTMLLIElement | null)[]>([]);
   const isMobile = useMediaQuery({ maxWidth: 768 });
-
-  const params = useParams();
-  const gameId = params.gameId;
-
-  const { data } = useGetResult(gameId as string);
 
   useEffect(() => {
     if (scrollToNum === null || scrollToNum === undefined) return;
@@ -26,8 +24,6 @@ export default function Review() {
       block: "start",
     });
   }, [scrollToNum]);
-
-  if (!data) return <p>No data</p>;
 
   const results = data.results;
 

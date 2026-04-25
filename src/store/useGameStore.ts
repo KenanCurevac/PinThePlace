@@ -10,10 +10,11 @@ export const useGameStore = create<GameStore>((set) => {
     points: 0,
     totalPoints: 0,
     distance: null,
-    timerStops: false,
+    timerStopped: false,
     revealAnswer: false,
     scrollToNum: null,
     review: [],
+    isCalculating: false,
 
     submitAnswer: (latGuess: number | null, lngGuess: number | null) =>
       set((state: GameStore) => {
@@ -74,12 +75,16 @@ export const useGameStore = create<GameStore>((set) => {
         };
       }),
 
-    setTimerStops: () => {
-      set({ timerStops: true });
+    setTimerStopped: (stopped: boolean) => {
+      set({ timerStopped: stopped });
     },
 
     setScrollTo: (index) => {
       set({ scrollToNum: index });
+    },
+
+    setIsCalculating: (value: boolean) => {
+      set({ isCalculating: value });
     },
   };
 });

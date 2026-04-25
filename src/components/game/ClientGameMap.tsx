@@ -1,20 +1,26 @@
 "use client";
 
+import { GameState } from "@/types/gameState";
 import dynamic from "next/dynamic";
+import { Skeleton } from "../ui/skeleton";
 
 const GameMap = dynamic(() => import("@/components/game/GameMap"), {
   ssr: false,
   loading: () => (
-    <div className="flex items-center justify-center h-full text-2xl text-gray-400">
-      Loading map...
-    </div>
+    <section className="[grid-area:map] h-full">
+      <Skeleton className="w-full h-full rounded-xl border-4 border-[#4ab7c3]" />
+    </section>
   ),
 });
 
-export default function ClientGameMap() {
+type Props = {
+  data: GameState;
+};
+
+export default function ClientGameMap({ data }: Props) {
   return (
     <div className="h-full">
-      <GameMap />
+      <GameMap data={data} />
     </div>
   );
 }

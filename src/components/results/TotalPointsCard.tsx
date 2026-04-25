@@ -1,21 +1,13 @@
 "use client";
 
-import { useGetResult } from "@/hooks/useGetResult";
-import { useParams } from "next/navigation";
+import { Results } from "@/types/results";
 
-export default function TotalPointsCard() {
-  const params = useParams();
-  const gameId = params.gameId;
+type Props = {
+  data: Results;
+};
 
-  const { data, isLoading, isError } = useGetResult(gameId as string);
-
-  if (isLoading) return <p>Loading...</p>;
-
-  if (isError) return <p>Error</p>;
-
-  if (!data) return <p>No data</p>;
-
-  const totalPoints = data.totalPoints;
+export default function TotalPointsCard({ data }: Props) {
+  const totalPoints = data?.totalPoints ?? 0;
 
   return (
     <dl className="h-full max-h-[192px] min-w-[130px] w-[34vw] sm:max-w-[230px] bg-[linear-gradient(135deg,#4ac3af,#7bd8cc)] flex flex-col justify-self-center self-center rounded-4xl drop-shadow-[2px_2px_4px_black] text-3xl sm:text-4xl font-semibold text-center font-sans p-4 text-[#01272d]">

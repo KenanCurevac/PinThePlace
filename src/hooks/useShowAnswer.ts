@@ -1,14 +1,12 @@
 import { useEffect, useRef } from "react";
 import { MutableRefObject } from "react";
 import L from "leaflet";
-import { useParams } from "next/navigation";
-import { useGameState } from "./useGameState";
+import { GameState } from "@/types/gameState";
 
-export default function useShowAnswer(mapRef: MutableRefObject<L.Map | null>) {
-  const params = useParams();
-  const gameId = params.gameId as string;
-
-  const { data, isLoading, isError } = useGameState(gameId);
+export default function useShowAnswer(
+  mapRef: MutableRefObject<L.Map | null>,
+  data: GameState,
+) {
   const guessMade = data?.currentQuestion?.guess;
   const currentQuestion = data?.currentQuestion;
   const latAnswer = currentQuestion?.correct?.lat;

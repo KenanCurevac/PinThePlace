@@ -1,18 +1,12 @@
 "use client";
 
-import { useGameState } from "@/hooks/useGameState";
-import { useParams } from "next/navigation";
+import { GameState } from "@/types/GameState";
 
-export default function Question() {
-  const params = useParams();
-  const gameId = params.gameId;
+type Props = {
+  data: GameState;
+};
 
-  const { data, isLoading, isError } = useGameState(gameId as string);
-
-  if (isLoading) return <p>Loading...</p>;
-
-  if (isError) return <p>Error</p>;
-
+export default function Question({ data }: Props) {
   const currentQuestion = data?.currentQuestion?.question ?? "";
 
   return (
