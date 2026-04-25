@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import useLeafletMap from "@/hooks/useLeafletMap";
-import useShowAllAnswers from "@/hooks/useShowAllAnswers";
+import useLeafletMap from "@/hooks/map/useLeafletMap";
+import useCorrectAnswers from "@/hooks/results/useCorrectAnswers";
 import "leaflet/dist/leaflet.css";
 import { Results } from "@/types/results";
 
@@ -14,7 +14,7 @@ type Props = {
 export default function ResultsMap({ data }: Props) {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const mapRef = useLeafletMap("map-results", isMobile);
-  useShowAllAnswers(mapRef, data);
+  useCorrectAnswers(mapRef, data);
 
   useEffect(() => {
     if (!mapRef.current) return;

@@ -4,7 +4,7 @@ import L from "leaflet";
 import { useGameStore } from "@/store/useGameStore";
 import { Results } from "@/types/results";
 
-export default function useShowAllAnswers(
+export default function useCorrectAnswers(
   mapRef: MutableRefObject<L.Map | null>,
   data: Results,
 ) {

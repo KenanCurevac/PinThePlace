@@ -1,11 +1,11 @@
 "use client";
 
-import useLeafletMap from "@/hooks/useLeafletMap";
-import useGuessAnswer from "@/hooks/useGuessAnswer";
-import useShowAnswer from "@/hooks/useShowAnswer";
+import useLeafletMap from "@/hooks/map/useLeafletMap";
+import useGuessAnswer from "@/hooks/game/useGuessAnswer";
+import useShowAnswer from "@/hooks/game/useShowAnswer";
 import "leaflet/dist/leaflet.css";
 import { useParams } from "next/navigation";
-import { useNextQuestion } from "@/hooks/useNextQuestion";
+import { useNextQuestion } from "@/hooks/api/useNextQuestion";
 import { GameState } from "@/types/gameState";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";

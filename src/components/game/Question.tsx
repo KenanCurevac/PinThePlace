@@ -1,6 +1,6 @@
 "use client";
 
-import { GameState } from "@/types/GameState";
+import { GameState } from "@/types/gameState";
 
 type Props = {
   data: GameState;

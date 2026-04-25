@@ -1,7 +1,7 @@
 import { useGameStore } from "@/store/useGameStore";
 import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { useSubmitGuess } from "./useSubmitGuess";
+import { useSubmitGuess } from "../api/useSubmitGuess";
 import { useQueryClient } from "@tanstack/react-query";
 import { GameState } from "@/types/gameState";
 
@@ -19,12 +19,15 @@ export default function useManageTimer(data: GameState) {
   const submitGuessMutation = useSubmitGuess();
   const queryClient = useQueryClient();
   const timerStopped = useGameStore((state) => state.timerStopped);
+  const setIsCalculating = useGameStore((state) => state.setIsCalculating);
 
   const timerRef = useRef<number | null>(null);
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
 
   useEffect(() => {
     if (!gameStarted || guessMade) return;
+
+    setIsCalculating(false);
 
     const updateTime = () => {
       const startedAt = new Date(gameStarted).getTime();
@@ -68,6 +71,8 @@ export default function useManageTimer(data: GameState) {
 
   useEffect(() => {
     if (timeLeft <= 0 && !guessMade) {
+      setIsCalculating(true);
+
       submitGuessMutation.mutate(
         { gameId, questionId, guessLat: null, guessLng: null },
         {

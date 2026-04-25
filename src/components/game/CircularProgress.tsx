@@ -1,5 +1,5 @@
-import useManageTimer from "@/hooks/useManageTimer";
-import { GameState } from "@/types/GameState";
+import useManageTimer from "@/hooks/game/useManageTimer";
+import { GameState } from "@/types/gameState";
 
 type CircularProgressProps = {
   size: number;

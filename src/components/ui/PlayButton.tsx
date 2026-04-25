@@ -1,6 +1,6 @@
 "use client";
 
-import { useCreateGame } from "@/hooks/useCreateGame";
+import { useCreateGame } from "@/hooks/api/useCreateGame";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 

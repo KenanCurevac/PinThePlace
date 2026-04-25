@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useGameState } from "@/hooks/useGameState";
+import { useGameState } from "@/hooks/api/useGameState";
 
 import Answer from "@/components/game/Answer";
 import ClientGameMap from "@/components/game/ClientGameMap";

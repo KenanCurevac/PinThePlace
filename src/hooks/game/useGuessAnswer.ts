@@ -3,7 +3,7 @@ import { MutableRefObject } from "react";
 import L from "leaflet";
 import { useGameStore } from "@/store/useGameStore";
 import { useParams } from "next/navigation";
-import { useSubmitGuess } from "./useSubmitGuess";
+import { useSubmitGuess } from "../api/useSubmitGuess";
 import { useQueryClient } from "@tanstack/react-query";
 import { GameState } from "@/types/gameState";
 

@@ -6,7 +6,7 @@ import ClientResultsMap from "@/components/results/ClientResultsMap";
 import Review from "@/components/results/Review";
 import TotalPointsCard from "@/components/results/TotalPointsCard";
 import PlayButton from "@/components/ui/PlayButton";
-import { useGetResult } from "@/hooks/useGetResult";
+import { useGetResult } from "@/hooks/api/useGetResult";
 import { useParams } from "next/navigation";
 import ResultsSkeleton from "@/components/results/ResultsSkeleton";
 
