@@ -29,6 +29,9 @@ export default function useGuessAnswer(
       return;
     }
 
+    setTimerStopped(false);
+    setIsCalculating(false);
+
     const map = mapRef.current;
     map.setView([20, 10], 2);
 
@@ -38,9 +41,6 @@ export default function useGuessAnswer(
       iconAnchor: [15, 40],
       popupAnchor: [0, -40],
     });
-
-    setTimerStopped(false);
-    setIsCalculating(false);
 
     function handleClick(e: L.LeafletMouseEvent) {
       const { lat, lng } = e.latlng;

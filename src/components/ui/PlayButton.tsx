@@ -1,6 +1,7 @@
 "use client";
 
 import { useCreateGame } from "@/hooks/api/useCreateGame";
+import { useGameStore } from "@/store/useGameStore";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -12,9 +13,11 @@ export default function PlayButton({ type }: PlayButtonProps) {
   const router = useRouter();
   const createGameMutation = useCreateGame();
   const [isStarting, setIsStarting] = useState(false);
+  const setTimerStopped = useGameStore((state) => state.setTimerStopped);
 
   const handleStart = () => {
     setIsStarting(true);
+    setTimerStopped(false);
 
     createGameMutation.mutate(undefined, {
       onSuccess: (data) => {
