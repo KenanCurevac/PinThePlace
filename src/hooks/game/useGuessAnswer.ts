@@ -65,7 +65,12 @@ export default function useGuessAnswer(
 
     map.on("click", handleClick);
 
-    if (!markerGuessRef.current && guess) {
+    if (
+      !markerGuessRef.current &&
+      guess &&
+      guess.lat !== null &&
+      guess.lng !== null
+    ) {
       markerGuessRef.current = L.marker([guess.lat, guess.lng], {
         icon: redIcon,
       }).addTo(map);
